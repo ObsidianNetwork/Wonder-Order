@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 
-import connectDB from "#utils/database/connect";
-import { Menus, type TMenu } from "#utils/database/models/menu";
-import { Orders, type TOrder, type TProduct } from "#utils/database/models/order";
+import type { TMenu } from "#utils/database/models/menu";
+import type { TOrder, TProduct } from "#utils/database/models/order";
+import { getTenantFromSession } from "#utils/database/tenantHelper";
 import { authOptions } from "#utils/helper/authHelper";
 import { CatchNextResponse } from "#utils/helper/common";
 
@@ -15,7 +15,7 @@ export async function POST(req: Request) {
 		if (!session) throw { status: 401, message: "Authentication Required" };
 		if (!body?.products.length) throw { status: 400, message: "Can't place order on empty cart" };
 
-		await connectDB();
+		const { Menus, Orders } = await getTenantFromSession(session);
 		const products: TProduct[] = await Promise.all(
 			body?.products?.map(async (product: TProduct & { _id: string }) => {
 				const menuItem = await Menus.findById<TMenu>(product?._id).lean();
@@ -33,7 +33,8 @@ export async function POST(req: Request) {
 		const restaurantID = session?.restaurant?.username;
 		const table = session?.restaurant?.table;
 		const customer = session?.customer?._id;
-		const order = await Orders.findOne<TOrder>({ restaurantID, customer, state: "active" });
+		// biome-ignore lint/suspicious/noExplicitAny: Mongoose filter type mismatch with ObjectId
+		const order = (await Orders.findOne({ restaurantID, customer, state: "active" } as any)) as TOrder | null;
 
 		if (order) {
 			order.products = [...order.products, ...products];

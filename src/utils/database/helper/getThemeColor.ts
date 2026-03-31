@@ -1,8 +1,11 @@
 import { getServerSession } from "next-auth";
 
 import { authOptions } from "#utils/helper/authHelper";
-import connectDB from "../connect";
-import { Profiles, type TProfile } from "../models/profile";
+import connectPlatformDB from "../connect";
+import { Clients } from "../models/platform/client";
+import { getTenantModels } from "../models/tenant";
+import type { TProfile } from "../schemas/profileSchema";
+import { getTenantConnection } from "../tenantConnect";
 
 export const getThemeColor = async (username?: string) => {
 	if (!username) {
@@ -10,7 +13,12 @@ export const getThemeColor = async (username?: string) => {
 		return session?.themeColor;
 	}
 
-	await connectDB();
-	const themeColor = (await Profiles.findOne<TProfile>({ restaurantID: username }))?.themeColor;
+	await connectPlatformDB();
+	const client = await Clients.findOne({ slug: username.toLowerCase() });
+	if (!client) return undefined;
+
+	const conn = await getTenantConnection(client.databaseName);
+	const models = getTenantModels(conn);
+	const themeColor = (await models.Profiles.findOne<TProfile>({ restaurantID: username }))?.themeColor;
 	return themeColor;
 };

@@ -1,19 +1,20 @@
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 
-import connectDB from "#utils/database/connect";
 import type { TCustomer } from "#utils/database/models/customer";
 import type { TMenu } from "#utils/database/models/menu";
-import { Orders, type TOrder, type TProduct } from "#utils/database/models/order";
+import type { TOrder, TProduct } from "#utils/database/models/order";
+import { getTenantFromSession } from "#utils/database/tenantHelper";
 import { authOptions } from "#utils/helper/authHelper";
 import { CatchNextResponse } from "#utils/helper/common";
 
 export async function GET() {
 	try {
-		await connectDB();
 		const session = await getServerSession(authOptions);
 		if (!session) throw { status: 401, message: "Authentication Required" };
+		if (session.role === "platform_admin") return NextResponse.json([]);
 
+		const { Orders } = await getTenantFromSession(session);
 		const restaurantID = session?.username;
 		const orders =
 			((await Orders.find({ restaurantID })

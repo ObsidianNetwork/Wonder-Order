@@ -1,21 +1,22 @@
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 
-import connectDB from "#utils/database/connect";
-import { Menus, type TMenu } from "#utils/database/models/menu";
+import type { TMenu } from "#utils/database/models/menu";
+import { getTenantFromSession } from "#utils/database/tenantHelper";
 import { authOptions } from "#utils/helper/authHelper";
 import { CatchNextResponse } from "#utils/helper/common";
 
 export async function POST(req: Request) {
 	try {
-		await connectDB();
 		const session = await getServerSession(authOptions);
 		const { itemId, hidden } = await req.json();
 
 		if (!session) throw { status: 401, message: "Authentication Required" };
+		if (session.role === "platform_admin") throw { status: 403, message: "Not a restaurant session" };
 		if (!itemId) throw { status: 400, message: "Menu item id is required" };
 		if (hidden === undefined) throw { status: 400, message: "Hidden value required" };
 
+		const { Menus } = await getTenantFromSession(session);
 		const menuItem = await Menus.findById<TMenu>(itemId);
 
 		if (!menuItem) throw { status: 404, message: `Menu item with id: ${itemId}, not found` };

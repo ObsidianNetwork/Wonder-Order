@@ -3,6 +3,7 @@ import type { UIEvent } from "react";
 
 import MenuEditor from "./MenuEditor/MenuEditor";
 import SettingsAccount from "./SettingsAccount";
+import TableManager from "./TableManager/TableManager";
 import "./settings.scss";
 
 const Settings = (props: TSettingsProps) => {
@@ -15,10 +16,8 @@ const Settings = (props: TSettingsProps) => {
 			{
 				{
 					account: <SettingsAccount />,
-
 					menu: <MenuEditor />,
-
-					// tables: <TableEditor showScrollBarAtRef={showScrollBarAtRef} />,
+					tables: <TableManager />,
 				}[subTab]
 			}
 		</div>

@@ -43,8 +43,28 @@
 			}
 		}
 
-		.logout {
+		.restaurantDetails {
+			flex: 1;
+
+			.description {
+				font-size: 14px;
+				opacity: 0.6;
+				margin: 4px 2px 0;
+			}
+
+			.editFields {
+				display: flex;
+				flex-direction: column;
+				gap: 0.5rem;
+				width: 100%;
+			}
+		}
+
+		.profileActions {
 			margin-left: auto;
+			display: flex;
+			gap: 0.5rem;
+			flex-shrink: 0;
 		}
 	}
 }

@@ -1,15 +1,20 @@
 import { connect } from "mongoose";
-import "./models/profile";
-import "./models/account";
-import "./models/customer";
-import "./models/kitchen";
-import "./models/menu";
-import "./models/table";
-import "./models/order";
-import "./models/aiConfig";
+// Import platform models so they register on the default connection
+import "./models/platform/client";
+import "./models/platform/clientTheme";
+import "./models/platform/counter";
+import "./models/platform/featureFlags";
+import "./models/platform/platformAdmin";
 
 if (!process.env.MONGODB_URI) {
 	throw new Error("Please add your MongoDB URI to Environment Variables.");
+}
+
+function getPlatformUri(): string {
+	const uri = process.env.MONGODB_URI as string;
+	const match = uri.match(/^(mongodb(?:\+srv)?:\/\/[^/]+)(?:\/[^?]*)?(\?.*)?$/);
+	if (!match) throw new Error("Invalid MONGODB_URI format");
+	return `${match[1]}/wonder_platform${match[2] || ""}`;
 }
 
 const options = {
@@ -21,17 +26,17 @@ if (!cached) {
 	cached = global.mongoose = { conn: null, promise: null };
 }
 
-async function connectDB() {
+async function connectPlatformDB() {
 	if (cached.conn) return cached.conn;
 	if (!cached.promise) {
-		console.log("🌿 Connecting to Mongo Server");
-		cached.promise = connect(process.env.MONGODB_URI as string, options)
+		console.log("🌿 Connecting to Platform DB");
+		cached.promise = connect(getPlatformUri(), options)
 			.then((mongoose) => {
-				console.log("🍃 Mongo Connection Established");
+				console.log("🍃 Platform DB Connection Established");
 				return mongoose;
 			})
 			.catch((error) => {
-				console.error("🍂 MongoDB Connection Failed: ", error);
+				console.error("🍂 Platform DB Connection Failed: ", error);
 			});
 	}
 
@@ -45,4 +50,4 @@ async function connectDB() {
 	return cached.conn;
 }
 
-export default connectDB;
+export default connectPlatformDB;

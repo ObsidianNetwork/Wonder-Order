@@ -1,19 +1,6 @@
-import { model, models, Schema } from "mongoose";
+import mongoose from "mongoose";
+import { AIConfigSchema } from "../schemas/aiConfigSchema";
 
-export interface IAIConfig {
-	exhaustedProviders: string[];
-}
-
-const aiConfigSchema = new Schema<IAIConfig>(
-	{
-		exhaustedProviders: {
-			type: [String],
-			default: [],
-		},
-	},
-	{ timestamps: true },
-);
-
-const AIConfig = models.AIConfig || model<IAIConfig>("AIConfig", aiConfigSchema);
-
+const AIConfig = mongoose.models?.AIConfig ?? mongoose.model("AIConfig", AIConfigSchema);
 export default AIConfig;
+export type { IAIConfig } from "../schemas/aiConfigSchema";

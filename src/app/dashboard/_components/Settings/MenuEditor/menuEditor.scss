@@ -20,6 +20,20 @@
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
+			gap: 1rem;
+
+			.menuCategoryOptions {
+				display: flex;
+				align-items: center;
+				gap: 0.5rem;
+				flex-shrink: 0;
+
+				.addCategoryForm {
+					display: flex;
+					align-items: center;
+					gap: 0.5rem;
+				}
+			}
 
 			.menuCategoryHeading {
 				color: var(--colorContentPrimary);
@@ -109,22 +123,50 @@
 			}
 		}
 
+		.menuItemOptions {
+				display: flex;
+				align-items: center;
+				gap: 0.5rem;
+			}
+
 		.menuItemContainer {
 			--menuItemSize: 200px;
-
 			padding: 30px 40px 55px;
+
+			.emptyMessage {
+				opacity: 0.5;
+				font-size: 0.9rem;
+				padding: 1rem 0;
+			}
+
+			.menuItemRow {
+				display: flex;
+				align-items: center;
+				gap: 0.5rem;
+
+				.deleteBtn {
+					flex-shrink: 0;
+				}
+
+				.deleteConfirm {
+					display: flex;
+					gap: 0.25rem;
+					flex-shrink: 0;
+				}
+			}
 		}
 	}
 
-	.menuEditorAdd {
-		position: fixed;
-		bottom: 20px; right: 20px;
-		display: flex;
-		z-index: 10;
-		transition: all 0.2s ease-out;
+	.menuCategory {
+		.deleteCategory {
+			margin-left: 6px;
+			opacity: 0;
+			cursor: pointer;
+			transition: opacity 0.15s;
+		}
 
-		&.active {
-			transform: scale(0);
+		&:hover .deleteCategory {
+			opacity: 0.6;
 		}
 	}
 }

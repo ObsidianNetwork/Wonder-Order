@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 
-import connectDB from "#utils/database/connect";
-import { Orders, type TOrder } from "#utils/database/models/order";
+import type { TOrder } from "#utils/database/models/order";
+import { getTenantFromSession } from "#utils/database/tenantHelper";
 import { authOptions } from "#utils/helper/authHelper";
 import { CatchNextResponse } from "#utils/helper/common";
 
@@ -13,11 +13,11 @@ export async function POST(req: Request) {
 		const body = await req.json();
 
 		if (!session) throw { status: 401, message: "Authentication Required" };
+		if (session.role === "platform_admin") throw { status: 403, message: "Not a restaurant session" };
 		if (!body?.orderID) throw { status: 400, message: "Order id is required to perform an action" };
 		if (!actions.includes(body?.action)) throw { status: 400, message: "Invalid action provided" };
 
-		await connectDB();
-
+		const { Orders } = await getTenantFromSession(session);
 		const order = await Orders.findOne<TOrder>({ _id: body?.orderID, restaurantID: session.username });
 
 		if (!order) throw { status: 400, message: `Order with id: ${body?.orderID} not found` };

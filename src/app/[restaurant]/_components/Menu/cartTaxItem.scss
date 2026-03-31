@@ -16,7 +16,7 @@
 
 		&.subtitle {
 			font-size: 12px;
-			color: var(--colorContentTertiary);
+			color: var(--wo-text-muted);
 			font-variation-settings: 'wdth' 75, 'wght' 500;
 			margin-left: 12px;
 		}
@@ -30,7 +30,7 @@
 		p {
 			font-size: 11px;
 			margin-bottom: 0;
-			color: var(--colorContentSecondary);
+			color: var(--wo-text-secondary);
 		}
 	}
 }

@@ -7,12 +7,12 @@
 	align-items: center;
 	gap: 8px;
 	padding: 10px 18px;
-	border-radius: 12px;
+	border-radius: var(--wo-radius-md);
 	background: linear-gradient(135deg, hsl(var(--colorBrandPrimary) / 0.15), hsl(var(--colorBrandPrimary) / 0.08));
 	backdrop-filter: blur(12px);
 	border: 1px solid hsl(var(--colorBrandPrimary) / 0.3);
 	text-decoration: none;
-	color: var(--colorContentPrimary);
+	color: var(--wo-text-primary);
 	font-size: 13px;
 	font-variation-settings:
 		'wdth' 75,

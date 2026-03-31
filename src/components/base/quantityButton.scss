@@ -30,11 +30,11 @@
 		}
 
 		&:active {
-			color: var(--colorBackgroundPrimary);
+			color: var(--wo-surface-1);
 			background-color: hsl(var(--colorBrandPrimary));
 
 			> span {
-				background-color: var(--colorBackgroundPrimary);
+				background-color: var(--wo-surface-1);
 			}
 		}
 
@@ -91,7 +91,7 @@
 	&.disabled {
 		.value {
 			span {
-				background-color: var(--colorContentPrimary);
+				background-color: var(--wo-text-primary);
 			}
 		}
 
@@ -101,7 +101,7 @@
 
 		.hiddenContainer {
 			.value {
-				border-color: var(--colorContentTertiary);
+				border-color: var(--wo-surface-border);
 				margin: 0 10px 0 0;
 			}
 		}
@@ -113,7 +113,7 @@
 			background-color: hsl(var(--colorBrandPrimary));
 
 			> span {
-				background-color: var(--colorBackgroundPrimary);
+				background-color: var(--wo-surface-1);
 			}
 		}
 	}

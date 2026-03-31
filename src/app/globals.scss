@@ -1,3 +1,4 @@
+@use '../utils/styles/theme';
 @use '../utils/styles/templates/ripple';
 @use '../utils/styles/templates/currency';
 @use '../utils/styles/templates/shake';
@@ -6,16 +7,17 @@
 html {
 	padding: 0;
 	margin: 0;
-	background: var(--colorBackgroundPrimary);
+	background: var(--wo-surface-0);
+	color: var(--wo-text-primary);
 	overflow-x: hidden;
 	* {
 		font-family: var(--montserrat);
 	}
 
 	--boxShadowInset: inset 0 0 8px rgb(150 150 150 / 15%);
-	--colorBackdropPrimary: rgb(0 0 0 / 70%);
-	--boxShadowGlow: 0 0 6px hsl(var(--colorBrandPrimary) 0.8);
-	--boxShadowGlowHover: 0 0 10px hsl(var(--colorBrandPrimary) 0.8);
+	--colorBackdropPrimary: var(--wo-backdrop);
+	--boxShadowGlow: var(--wo-brand-glow);
+	--boxShadowGlowHover: 0 0 10px hsl(var(--colorBrandPrimary) / 0.5);
 	--boxShadowGlowActive: 0 0 0 transparent;
 }
 
@@ -24,7 +26,8 @@ body {
 	height: 100dvh;
 	padding: 0;
 	margin: 0;
-	background: var(--colorBackgroundPrimary);
+	background: var(--wo-surface-0);
+	color: var(--wo-text-primary);
 	overflow-x: hidden;
 }
 

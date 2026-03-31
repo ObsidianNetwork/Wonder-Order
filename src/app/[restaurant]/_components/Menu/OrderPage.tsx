@@ -1,6 +1,6 @@
 import { signOut, useSession } from "next-auth/react";
-import { type SyntheticEvent, type UIEvent, useEffect, useMemo, useRef, useState } from "react";
-import { ActionCard, Button, Icon, Spinner } from "xtreme-ui";
+import { type UIEvent, useEffect, useMemo, useRef, useState } from "react";
+import { ActionCard, Button, Spinner } from "xtreme-ui";
 
 import SearchButton from "#components/base/SearchButton";
 import SideSheet from "#components/base/SideSheet";
@@ -27,7 +27,6 @@ const OrderPage = () => {
 	const category = useMemo(() => (categoryParam ? categoryParam.split(",") : []), [categoryParam]);
 
 	const order = useRef<HTMLDivElement>(null);
-	const categories = useRef<HTMLDivElement>(null);
 	const [sideSheetOpen, setSideSheetOpen] = useState(false);
 	const [topHeading, setTopHeading] = useState(["Menu", "Category"]);
 	const [orderHeading, setOrderHeading] = useState(["Explore", "Menu"]);
@@ -36,8 +35,6 @@ const OrderPage = () => {
 	const [searchActive, setSearchActive] = useState(false);
 	const [searchValue, setSearchValue] = useState("");
 	const [floatHeader, setFloatHeader] = useState(false);
-	const [leftCategoryScroll, setLeftCategoryScroll] = useState(false);
-	const [rightCategoryScroll, setRightCategoryScroll] = useState(true);
 	const [showInfoCard, setShowInfoCard] = useState(false);
 
 	const [filteredProducts, setFilteredProducts] = useState<Array<TMenuCustom>>(menus);
@@ -57,21 +54,6 @@ const OrderPage = () => {
 			return;
 		}
 		return setFloatHeader(false);
-	};
-	const onCategoryScroll = (event: SyntheticEvent) => {
-		const target = event.target as HTMLElement;
-
-		if (target.scrollLeft > 50) setLeftCategoryScroll(true);
-		else setLeftCategoryScroll(false);
-
-		if (Math.round(target.scrollWidth - target.scrollLeft) - 50 > target.clientWidth) setRightCategoryScroll(true);
-		else setRightCategoryScroll(false);
-	};
-	const categoryScrollLeft = () => {
-		if (categories.current) categories.current.scrollLeft -= 400;
-	};
-	const categoryScrollRight = () => {
-		if (categories.current) categories.current.scrollLeft += 400;
 	};
 	const onCategoryClick = (categoryName: string) => {
 		let newCategory = [];
@@ -175,19 +157,12 @@ const OrderPage = () => {
 				</div>
 				{restaurant && (
 					<div className="category">
-						<div className="itemCategories" ref={categories} onScroll={onCategoryScroll}>
+						<div className="itemCategories">
 							{restaurant?.profile?.categories?.map((item, i) => (
 								<ActionCard key={i} className={`menuCategory ${category.includes(item) ? "active" : ""}`} onClick={() => onCategoryClick(item)}>
 									<span className="title">{item}</span>
 								</ActionCard>
 							))}
-							<div className="space" />
-							<div className={`scrollLeft ${leftCategoryScroll ? "show" : ""}`} onClick={categoryScrollLeft}>
-								<Icon code="f053" type="solid" />
-							</div>
-							<div className={`scrollRight ${rightCategoryScroll ? "show" : ""}`} onClick={categoryScrollRight}>
-								<Icon code="f054" type="solid" />
-							</div>
 						</div>
 					</div>
 				)}

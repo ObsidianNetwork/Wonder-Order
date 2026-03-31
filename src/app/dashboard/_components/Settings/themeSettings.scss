@@ -1,10 +1,10 @@
 .themeSettings {
 	width: 100%;
-	border-radius: 20px;
+	border-radius: var(--wo-radius-xl);
 	margin-top: 30px;
 	padding: 20px 30px;
-	background: var(--colorBackgroundPrimary);
-	box-shadow: 0 10px 10px -10px rgb(0 0 0 / 10%);
+	background: var(--wo-surface-1);
+	box-shadow: var(--wo-shadow-sm);
 
 	.colorHeader {
 		display: flex;
@@ -13,7 +13,7 @@
 		align-items: center;
 
 		.heading {
-			color: var(--colorContentPrimary);
+			color: var(--wo-text-primary);
 			font-size: 30px;
 			font-variation-settings: 'wdth' 75, 'wght' 500;
 			margin: 0;

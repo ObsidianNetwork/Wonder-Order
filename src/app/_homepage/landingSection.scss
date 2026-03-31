@@ -33,7 +33,7 @@
 		height: 100%;
 		opacity: 0;
 		pointer-events: none;
-		background-image: linear-gradient(to right, var(--colorBackgroundPrimary) 0%, transparent 100%);
+		background-image: linear-gradient(to right, var(--wo-surface-0) 0%, transparent 100%);
 		transition: opacity 1s ease-out;
 	}
 
@@ -115,7 +115,7 @@
 
 		.overlay {
 			opacity: 0.92;
-			background-image: linear-gradient(to right, var(--colorBackgroundPrimary) 0%, var(--colorBackgroundPrimary) 100%);
+			background-image: linear-gradient(to right, var(--wo-surface-0) 0%, var(--wo-surface-0) 100%);
 		}
 
 		.landingGreeting {

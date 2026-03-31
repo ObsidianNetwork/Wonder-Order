@@ -12,13 +12,13 @@
 			.options {
 				> .button {
 					&.accept {
-						color: var(--colorBackgroundPrimary);
+						color: var(--wo-surface-1);
 						background-color: hsl(var(--colorAlertError));
 						border-color: hsl(var(--colorAlertError));
 					}
 
 					&.reject {
-						color: var(--colorContentSecondary);
+						color: var(--wo-text-secondary);
 
 						&:hover {
 							border-color: var(--colorBackgroundTertiary);
@@ -91,7 +91,7 @@
 					display: block;
 					width: var(--infoHeight);
 					height: var(--infoHeight);
-					color: var(--colorContentPrimary);
+					color: var(--wo-text-primary);
 					margin-right: 2px;
 				}
 			}
@@ -130,12 +130,12 @@
 				@media (hover: hover) {
 					&:hover {
 						border-color: hsl(var(--colorBrandPrimary));
-						background-color: var(--colorBackgroundPrimary);
+						background-color: var(--wo-surface-1);
 					}
 				}
 
 				&.accept {
-					color: var(--colorBackgroundPrimary);
+					color: var(--wo-surface-1);
 					background-color: hsl(var(--colorBrandPrimary));
 					border-color: hsl(var(--colorBrandPrimary));
 					transition: transform 0.1s ease-out;
@@ -148,8 +148,8 @@
 	> .detailContent {
 		width: 100%;
 		height: calc(100% - 135px);
-		background-color: var(--colorBackgroundSecondary);
-		border-radius: 15px;
+		background-color: var(--wo-surface-0);
+		border-radius: var(--wo-radius-lg);
 		padding: 30px 30px 20px;
 		box-shadow: var(--boxShadowInset);
 		overflow: auto;

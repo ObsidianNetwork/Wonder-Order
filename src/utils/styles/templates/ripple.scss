@@ -9,11 +9,11 @@
 	}
 
 	&.light{
-		--rippleColor: var(--colorBackgroundPrimary);
+		--rippleColor: var(--wo-surface-1);
 	}
 
 	&.dark{
-		--rippleColor: var(--colorContentPrimary);
+		--rippleColor: var(--wo-text-primary);
 	}
 
 	&::after {

@@ -1,4 +1,4 @@
-import { type UIEvent, useRef, useState } from "react";
+import { useState } from "react";
 import { toast } from "react-toastify";
 import { Button, Icon, Spinner, Textfield } from "xtreme-ui";
 
@@ -22,18 +22,8 @@ const MenuEditor = () => {
 	const [newCategory, setNewCategory] = useState("");
 	const [categoryLoading, setCategoryLoading] = useState(false);
 
-	const categories = useRef<HTMLDivElement>(null);
-	const [leftCategoryScroll, setLeftCategoryScroll] = useState(false);
-	const [rightCategoryScroll, setRightCategoryScroll] = useState(true);
-
 	const currentCategory = profile?.categories?.[category] ?? "";
 	const filteredMenus = menus.filter((item) => item.category === currentCategory);
-
-	const onCategoryScroll = (event: UIEvent<HTMLDivElement>) => {
-		const target = event.target as HTMLDivElement;
-		setLeftCategoryScroll(target.scrollLeft > 50);
-		setRightCategoryScroll(Math.round(target.scrollWidth - target.scrollLeft) - 50 > target.clientWidth);
-	};
 
 	const onAddCategory = async () => {
 		if (!newCategory.trim()) return;
@@ -127,7 +117,7 @@ const MenuEditor = () => {
 						)}
 					</div>
 				</div>
-				<div className="menuCategoryContainer" ref={categories} onScroll={onCategoryScroll}>
+				<div className="menuCategoryContainer">
 					{profile?.categories?.map((item, i) => (
 						<div key={item} className={`menuCategory ${category === i ? "active" : ""}`} onClick={() => setCategory(i)}>
 							<span className="title">{item}</span>
@@ -141,21 +131,6 @@ const MenuEditor = () => {
 							</span>
 						</div>
 					))}
-					<div className="space" />
-				</div>
-				<div
-					className={`scrollLeft ${leftCategoryScroll ? "show" : ""}`}
-					onClick={() => {
-						if (categories?.current) categories.current.scrollLeft -= 400;
-					}}>
-					<Icon code="f053" type="solid" />
-				</div>
-				<div
-					className={`scrollRight ${rightCategoryScroll ? "show" : ""}`}
-					onClick={() => {
-						if (categories?.current) categories.current.scrollLeft += 400;
-					}}>
-					<Icon code="f054" type="solid" />
 				</div>
 			</div>
 			<div className="menuItemEditor">

@@ -8,12 +8,12 @@
 	.profileSettingsCard {
 		position: relative;
 		width: 100%;
-		border-radius: 20px;
+		border-radius: var(--wo-radius-xl);
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		background-color: var(--colorBackgroundPrimary);
-		box-shadow: 0 10px 10px -10px rgb(0 0 0 / 10%);
+		background-color: var(--wo-surface-1);
+		box-shadow: var(--wo-shadow-sm);
 		padding: 20px 30px;
 
 		.avatar {
@@ -22,7 +22,7 @@
 
 		.restaurantDetails {
 			.name {
-				color: var(--colorContentPrimary);
+				color: var(--wo-text-primary);
 				font-size: 38px;
 				font-variation-settings: 'wdth' 75, 'wght' 500;
 				margin: 0;

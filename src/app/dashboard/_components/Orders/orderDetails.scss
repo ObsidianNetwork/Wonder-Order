@@ -3,7 +3,7 @@
 	flex-direction: column;
 	width: 100%;
 	height: 100%;
-	background: var(--colorBackgroundSecondary);
+	background: var(--wo-surface-0);
 	border-radius: 1rem;
 	overflow: hidden;
 	box-shadow: var(--boxShadowInset);
@@ -15,7 +15,7 @@
 		justify-content: space-between;
 		align-items: center;
 		padding: 1.5rem;
-		background: var(--colorBackgroundPrimary);
+		background: var(--wo-surface-1);
 		border-bottom: 1px solid var(--colorBorder);
 		z-index: 10;
 		box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
@@ -29,13 +29,13 @@
 				margin: 0;
 				font-size: 1.5rem;
 				font-weight: 700;
-				color: var(--colorTextPrimary);
+				color: var(--wo-text-primary);
 				letter-spacing: -0.025em;
 			}
 
 			.orderId {
 				font-size: 0.8rem;
-				color: var(--colorTextSecondary);
+				color: var(--wo-text-secondary);
 				font-weight: 500;
 				display: flex;
 				align-items: center;
@@ -107,7 +107,7 @@
 			margin: 0;
 			font-size: 0.85rem;
 			font-weight: 700;
-			color: var(--colorTextSecondary);
+			color: var(--wo-text-secondary);
 			text-transform: uppercase;
 			letter-spacing: 0.1em;
 			padding-bottom: 0.5rem;
@@ -125,7 +125,7 @@
 			display: flex;
 			flex-direction: column;
 			gap: 0.4rem;
-			background: var(--colorBackgroundPrimary);
+			background: var(--wo-surface-1);
 			padding: 1rem;
 			border-radius: 0.75rem;
 			border: 1px solid var(--colorBorder);
@@ -139,7 +139,7 @@
 
 			.label {
 				font-size: 0.7rem;
-				color: var(--colorTextSecondary);
+				color: var(--wo-text-secondary);
 				text-transform: uppercase;
 				font-weight: 700;
 				letter-spacing: 0.05em;
@@ -147,7 +147,7 @@
 
 			span {
 				font-size: 1rem;
-				color: var(--colorTextPrimary);
+				color: var(--wo-text-primary);
 				font-weight: 600;
 			}
 		}
@@ -160,7 +160,7 @@
 			border: 1px solid var(--colorBorder);
 			border-radius: 1rem;
 			overflow: hidden;
-			background: var(--colorBackgroundPrimary);
+			background: var(--wo-surface-1);
 			box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
 
 			.row {
@@ -169,11 +169,11 @@
 				border-bottom: 1px solid var(--colorBorder);
 				align-items: center;
 				font-size: 0.95rem;
-				color: var(--colorTextPrimary);
+				color: var(--wo-text-primary);
 				transition: background 0.15s ease;
 
 				&:hover:not(.headerRow) {
-					background: var(--colorBackgroundSecondary);
+					background: var(--wo-surface-0);
 				}
 
 				&:last-child {
@@ -181,10 +181,10 @@
 				}
 
 				&.headerRow {
-					background: var(--colorBackgroundSecondary);
+					background: var(--wo-surface-0);
 					font-weight: 700;
 					font-size: 0.75rem;
-					color: var(--colorTextSecondary);
+					color: var(--wo-text-secondary);
 					text-transform: uppercase;
 					letter-spacing: 0.05em;
 					border-bottom-width: 2px;
@@ -199,7 +199,7 @@
 
 						.variant {
 							font-size: 0.75rem;
-							color: var(--colorTextSecondary);
+							color: var(--wo-text-secondary);
 							font-style: italic;
 						}
 					}
@@ -207,7 +207,7 @@
 						width: 15%;
 						text-align: center;
 						font-weight: 600;
-						color: var(--colorTextSecondary);
+						color: var(--wo-text-secondary);
 					}
 					&.price {
 						width: 20%;
@@ -228,7 +228,7 @@
 	}
 
 	.summary {
-		background: var(--colorBackgroundPrimary);
+		background: var(--wo-surface-1);
 		padding: 1.5rem;
 		border-radius: 1rem;
 		gap: 1rem;
@@ -240,13 +240,13 @@
 			justify-content: space-between;
 			align-items: center;
 			font-size: 0.95rem;
-			color: var(--colorTextSecondary);
+			color: var(--wo-text-secondary);
 
 			span:last-child {
 				font-feature-settings: 'tnum';
 				font-variant-numeric: tabular-nums;
 				font-weight: 500;
-				color: var(--colorTextPrimary);
+				color: var(--wo-text-primary);
 			}
 
 			&.grandTotal {
@@ -257,7 +257,7 @@
 				span:first-child {
 					font-size: 1rem;
 					font-weight: 700;
-					color: var(--colorTextPrimary);
+					color: var(--wo-text-primary);
 				}
 
 				span:last-child {

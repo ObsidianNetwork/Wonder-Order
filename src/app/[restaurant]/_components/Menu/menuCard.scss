@@ -4,14 +4,14 @@
 	position: relative;
 	display: flex;
 	flex-direction: column;
-	background-color: var(--colorBackgroundPrimary);
-	border-radius: 20px;
+	background-color: var(--wo-surface-1);
+	border-radius: var(--wo-radius-xl);
 	padding: 10px;
 	transition: box-shadow 0.13s ease-in;
-	box-shadow: 0 8px 12px rgb(150 150 150 / 15%);
+	box-shadow: var(--wo-shadow-md);
 
 	@mixin showInfo {
-		box-shadow: 0 8px 12px rgb(150 150 150 / 15%);
+		box-shadow: var(--wo-shadow-md);
 		transition: box-shadow 0.13s ease-out;
 
 		.picture {
@@ -27,7 +27,7 @@
 		.vegIcon {
 			width: auto;
 			background-color: transparent;
-			border: 0 solid var(--colorBackgroundSecondary);
+			border: 0 solid var(--wo-surface-border);
 
 			.icon {
 				display: none;
@@ -123,8 +123,8 @@
 
 			.label {
 				text-align: end;
-				color: var(--colorContentPrimary);
-				background-color: var(--colorBackgroundPrimary);
+				color: var(--wo-text-primary);
+				background-color: var(--wo-surface-1);
 			}
 		}
 	}
@@ -136,8 +136,8 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		border: 1px solid var(--colorContentTertiary);
-		border-radius: 15px;
+		border: 1px solid var(--wo-surface-border);
+		border-radius: var(--wo-radius-lg);
 		overflow: hidden;
 
 		> span {
@@ -180,8 +180,8 @@
 		align-items: center;
 		overflow: hidden;
 		border-radius: 9999px;
-		background-color: var(--colorBackgroundPrimary);
-		border: 1px solid var(--colorContentTertiary);
+		background-color: var(--wo-surface-1);
+		border: 1px solid var(--wo-surface-border);
 
 		&.veg .icon {
 			color: hsl(var(--colorAlertSuccess));
@@ -204,7 +204,7 @@
 			text-transform: capitalize;
 			white-space: nowrap;
 			user-select: none;
-			color: var(--colorContentPrimary);
+			color: var(--wo-text-primary);
 		}
 	}
 

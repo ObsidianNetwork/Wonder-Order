@@ -4,7 +4,7 @@
 	flex-direction: column;
 	height: 100%;
 	width: 100%;
-	background-color: var(--colorBackgroundSecondary);
+	background-color: var(--wo-surface-0);
 
 	.noContent {
 		> div {
@@ -52,10 +52,10 @@
 
 		.details {
 			flex-grow: 1;
-			border-radius: 15px;
+			border-radius: var(--wo-radius-lg);
 			margin: calc(var(--initialHeaderHeight) + 6px) 30px 15px 10px;
-			background-color: var(--colorBackgroundPrimary);
-			box-shadow: 0 0 8px rgb(150 150 150 / 15%);
+			background-color: var(--wo-surface-1);
+			box-shadow: var(--wo-shadow-sm);
 
 			&.reject {
 				box-shadow: 0 0 5px hsl(var(--colorAlertError));

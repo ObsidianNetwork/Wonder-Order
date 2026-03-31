@@ -7,7 +7,7 @@
 		margin-bottom: 1.25rem;
 		font-size: 1.2rem;
 		font-weight: 600;
-		color: var(--colorContentPrimary);
+		color: var(--wo-text-primary);
 	}
 
 	.formGrid {
@@ -32,10 +32,10 @@
 
 			select {
 				padding: 0.6rem 0.75rem;
-				border-radius: 8px;
-				border: 1px solid var(--colorBorderPrimary);
-				background: var(--colorBackgroundSecondary);
-				color: var(--colorContentPrimary);
+				border-radius: var(--wo-radius-sm);
+				border: 1px solid var(--wo-surface-border);
+				background: var(--wo-surface-0);
+				color: var(--wo-text-primary);
 				font-size: 0.85rem;
 				font-family: var(--montserrat);
 				text-transform: capitalize;

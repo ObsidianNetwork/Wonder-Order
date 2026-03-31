@@ -14,8 +14,8 @@
 		height: 4px;
 		top: 10px;
 		left: 10px;
-		border-top: 2px solid var(--colorContentPrimary);
-		border-left: 2px solid var(--colorContentPrimary);
+		border-top: 2px solid var(--wo-text-primary);
+		border-left: 2px solid var(--wo-text-primary);
 		border-top-left-radius: 1rem;
 		opacity: 0.5;
 		transition: all 0.2s ease;
@@ -42,7 +42,7 @@
 	border-radius: 1.5rem;
 	border-bottom-left-radius: 0.5rem;
 	border-bottom-right-radius: 0.5rem;
-	background: var(--colorBackgroundPrimary);
+	background: var(--wo-surface-1);
 	width: 100%;
 	min-height: 0;
 
@@ -123,13 +123,13 @@
 						font-variation-settings:
 							'wdth' 75,
 							'wght' 500;
-						color: var(--colorContentPrimary);
+						color: var(--wo-text-primary);
 						line-height: 1.2;
 					}
 
 					.messageTime {
 						font-size: 0.7rem;
-						color: var(--colorContentSecondary);
+						color: var(--wo-text-secondary);
 						font-variation-settings:
 							'wdth' 75,
 							'wght' 400;
@@ -145,7 +145,7 @@
 
 				.assistantText {
 					padding: 0;
-					color: var(--colorContentPrimary);
+					color: var(--wo-text-primary);
 					font-size: 14px;
 					line-height: 1.5;
 					font-variation-settings:
@@ -164,7 +164,7 @@
 				span {
 					width: 4px;
 					height: 4px;
-					background: var(--colorContentPrimary);
+					background: var(--wo-text-primary);
 					border-radius: 50%;
 					animation: typing 1.4s infinite ease-in-out;
 

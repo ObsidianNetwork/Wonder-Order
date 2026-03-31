@@ -14,7 +14,7 @@
 		visibility: visible;
 
 		.backdrop {
-			background-color: var(--colorBackdropPrimary);
+			background-color: var(--wo-backdrop);
 		}
 
 		.modalPane {
@@ -44,10 +44,10 @@
 		padding: 36px;
 		transform: scale(0) translate(50%, -50%);
 		transform-origin: top right;
-		border-radius: 25px;
+		border-radius: var(--wo-radius-xl);
 		overflow: hidden;
-		box-shadow: 0 0 100px rgb(0 0 0 / 30%);
-		background-color: var(--colorBackgroundPrimary);
+		box-shadow: var(--wo-shadow-lg);
+		background-color: var(--wo-surface-1);
 		transition: all var(--modalDuration) ease-out, top var(--modalDuration) ease-in;
 
 		.closeModal {

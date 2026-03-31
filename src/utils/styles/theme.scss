@@ -1,0 +1,62 @@
+// Wonder-Order Base Theme
+// Override these --wo-* variables per client to customise the look.
+// Brand colour comes from xtreme-ui's themeController (--colorBrandPrimary).
+
+:root {
+	// Surfaces (light mode)
+	--wo-surface-0: #ffffff;
+	--wo-surface-1: #f8f8fa;
+	--wo-surface-2: #f0f0f5;
+	--wo-surface-border: #e8e8ee;
+
+	// Text
+	--wo-text-primary: #1a1a2e;
+	--wo-text-secondary: #6b6b80;
+	--wo-text-muted: #a0a0b0;
+
+	// Brand (derived from xtreme-ui theme colour)
+	--wo-brand: hsl(var(--colorBrandPrimary));
+	--wo-brand-soft: hsl(var(--colorBrandPrimary) / 0.1);
+	--wo-brand-glow: 0 0 12px hsl(var(--colorBrandPrimary) / 0.3);
+
+	// Radius scale
+	--wo-radius-sm: 8px;
+	--wo-radius-md: 12px;
+	--wo-radius-lg: 16px;
+	--wo-radius-xl: 24px;
+	--wo-radius-full: 100px;
+
+	// Spacing
+	--wo-page-padding: 1.5rem;
+
+	// Transitions
+	--wo-transition: 0.2s ease;
+	--wo-transition-slow: 0.35s ease;
+
+	// Shadows
+	--wo-shadow-sm: 0 1px 3px rgb(0 0 0 / 5%);
+	--wo-shadow-md: 0 4px 12px rgb(0 0 0 / 8%);
+	--wo-shadow-lg: 0 8px 24px rgb(0 0 0 / 12%);
+
+	// Backdrop
+	--wo-backdrop: rgb(0 0 0 / 50%);
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--wo-surface-0: #0a0a0f;
+		--wo-surface-1: #12121c;
+		--wo-surface-2: #1a1a2e;
+		--wo-surface-border: #27273a;
+
+		--wo-text-primary: #e4e4e7;
+		--wo-text-secondary: #a1a1aa;
+		--wo-text-muted: #52525b;
+
+		--wo-shadow-sm: 0 1px 3px rgb(0 0 0 / 20%);
+		--wo-shadow-md: 0 4px 12px rgb(0 0 0 / 30%);
+		--wo-shadow-lg: 0 8px 24px rgb(0 0 0 / 40%);
+
+		--wo-backdrop: rgb(0 0 0 / 70%);
+	}
+}

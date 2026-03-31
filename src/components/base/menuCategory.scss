@@ -2,8 +2,8 @@
 	position: relative;
 	height: 60px;
 	max-height: 60px;
-	background-color: var(--colorBackgroundPrimary);
-	border-radius: 15px;
+	background-color: var(--wo-surface-1);
+	border-radius: var(--wo-radius-lg);
 	margin-right: 10px;
 	user-select: none;
 	display: flex;
@@ -33,7 +33,7 @@
 		overflow: hidden;
 		text-transform: capitalize;
 		margin: 0 30px;
-		color: var(--colorContentPrimary);
+		color: var(--wo-text-primary);
 	}
 }
 

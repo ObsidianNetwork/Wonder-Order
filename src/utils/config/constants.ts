@@ -1,5 +1,5 @@
 // Centralised app configuration
-// Update these values to customise the platform for your market
+// These are platform-level defaults. Per-client values come from the database.
 
 export const APP = {
 	name: "Wonder-Order",
@@ -11,8 +11,7 @@ export const APP = {
 } as const;
 
 export const LOCALE = {
+	// Defaults -- can be overridden per client
 	currencySymbol: "$",
-	currencyCode: "AUD",
-	countryCode: "AU",
-	dialCode: "61",
+	defaultDialCode: "61",
 } as const;

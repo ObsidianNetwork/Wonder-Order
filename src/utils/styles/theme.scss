@@ -3,6 +3,9 @@
 // Brand colour comes from xtreme-ui's themeController (--colorBrandPrimary).
 
 :root {
+	// Currency (override per client: '$', '£', '€', '¥', etc.)
+	--wo-currency: '$';
+
 	// Surfaces (light mode)
 	--wo-surface-0: #ffffff;
 	--wo-surface-1: #f8f8fa;

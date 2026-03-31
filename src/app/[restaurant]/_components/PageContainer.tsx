@@ -1,21 +1,35 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
+import { useEffect, useRef } from "react";
 
-import UnderConstruction from "#components/layout/UnderConstruction";
+import { useQueryParams } from "#utils/hooks/useQueryParams";
 
+import RestaurantHome from "./Home/RestaurantHome";
 import OrderPage from "./Menu/OrderPage";
 
 export default function PageContainer() {
 	const searchParams = useSearchParams();
+	const params = useQueryParams();
 	const tab = searchParams.get("tab");
+	const table = searchParams.get("table");
+	const hasAutoSwitched = useRef(false);
+
+	// On first load with ?table=X but no tab, auto-switch to menu once
+	useEffect(() => {
+		if (table && !tab && !hasAutoSwitched.current) {
+			hasAutoSwitched.current = true;
+			params.set({ tab: "menu" });
+		}
+	}, [table, tab, params]);
+
+	const showMenu = tab === "menu";
+	const showHome = !showMenu;
 
 	return (
 		<div className="pageContainer">
-			{tab === "explore" && <UnderConstruction />}
-			{tab === "menu" && <OrderPage />}
-			{tab === "reviews" && <UnderConstruction />}
-			{tab === "contact" && <UnderConstruction />}
+			{showMenu && <OrderPage />}
+			{showHome && <RestaurantHome />}
 		</div>
 	);
 }

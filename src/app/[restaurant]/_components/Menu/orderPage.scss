@@ -359,3 +359,62 @@
 		}
 	}
 }
+.tableEntryModal {
+	padding: 1.5rem;
+	text-align: center;
+	min-width: 300px;
+
+	h3 {
+		font-size: 1.2rem;
+		font-weight: 600;
+		color: var(--wo-text-primary);
+		margin-bottom: 0.4rem;
+	}
+
+	p {
+		font-size: 0.85rem;
+		color: var(--wo-text-secondary);
+		margin-bottom: 1.5rem;
+	}
+
+	.tableEntryInput {
+		display: flex;
+		gap: 0.5rem;
+		justify-content: center;
+
+		input {
+			width: 120px;
+			padding: 0.6rem 1rem;
+			border-radius: var(--wo-radius-sm);
+			border: 1px solid var(--wo-surface-border);
+			background: var(--wo-surface-1);
+			color: var(--wo-text-primary);
+			font-size: 1.1rem;
+			text-align: center;
+			font-family: inherit;
+			outline: none;
+
+			&:focus { border-color: var(--wo-brand); }
+			&::placeholder { color: var(--wo-text-muted); font-size: 0.85rem; }
+		}
+	}
+
+	.tableEntryDivider {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		margin: 1.25rem 0;
+
+		&::before, &::after {
+			content: '';
+			flex: 1;
+			height: 1px;
+			background: var(--wo-surface-border);
+		}
+
+		span {
+			font-size: 0.8rem;
+			color: var(--wo-text-muted);
+		}
+	}
+}

@@ -93,6 +93,26 @@ const SettingsAccount = () => {
 					)}
 				</div>
 			</div>
+			<div className="orderSettingsCard">
+				<div className="settingRow">
+					<div className="settingInfo">
+						<span className="settingLabel">Auto-Accept Orders</span>
+						<span className="settingDesc">Orders go straight to kitchen without manual approval</span>
+					</div>
+					<button
+						type="button"
+						className={`toggle ${profile?.autoAcceptOrders ? "on" : ""}`}
+						onClick={async () => {
+							await fetch("/api/admin/profile", {
+								method: "PATCH",
+								headers: { "Content-Type": "application/json" },
+								body: JSON.stringify({ autoAcceptOrders: !profile?.autoAcceptOrders }),
+							});
+							profileMutate();
+						}}
+					/>
+				</div>
+			</div>
 			<PasswordSettings />
 			<ThemeSettings />
 		</div>

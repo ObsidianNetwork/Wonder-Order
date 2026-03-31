@@ -127,7 +127,12 @@ const CartPage = (props: TCartPageProps) => {
 								<>
 									<p>Sub Total</p>
 									<span className="totalValue currency">{order?.orderTotal} </span>
-									{order?.orderTotal && <span className="plusTaxes"> + ${order?.taxTotal} Tax</span>}
+									{order?.orderTotal && (
+										<span className="plusTaxes">
+											{" "}
+											+ <span className="currency">{order?.taxTotal}</span> Tax
+										</span>
+									)}
 								</>
 							)}
 						</div>
@@ -136,7 +141,7 @@ const CartPage = (props: TCartPageProps) => {
 						<Button
 							iconType="solid"
 							size="mini"
-							icon={bottomBarActive ? "f078" : props.selectedProducts.length > 0 ? "e1bc" : "f09d"}
+							icon={bottomBarActive ? "f078" : props.selectedProducts.length > 0 ? "e43b" : "f09d"}
 							label={
 								bottomBarActive
 									? "close"

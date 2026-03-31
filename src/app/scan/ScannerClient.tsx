@@ -100,15 +100,15 @@ const ScannerClient = () => {
 			if (url) {
 				try {
 					const urlObj = new URL(url);
-					const siteHost = window.location.hostname;
-					const isValidQR = urlObj.hostname === siteHost || urlObj.hostname.includes("wonder-order");
 					const hasTable = urlObj.searchParams.has("table");
+					const hasSlug = urlObj.pathname.length > 1;
 
-					if (isValidQR && hasTable) {
+					if (hasTable && hasSlug) {
 						setIsScanning(true);
-						window.location.replace(urlObj.pathname + urlObj.search + urlObj.hash);
+						// Use pathname + search from scanned URL on current origin
+						window.location.replace(urlObj.pathname + urlObj.search);
 					} else {
-						toast.error("Not a valid Wonder-Order QR");
+						toast.error("QR code doesn't contain a valid table link");
 					}
 				} catch {
 					toast.error("Invalid QR Code");

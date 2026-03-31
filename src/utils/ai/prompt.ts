@@ -1,3 +1,4 @@
+import { LOCALE } from "#utils/config/constants";
 import type { TMenu } from "#utils/database/models/menu";
 
 export const getSystemPrompt = (restaurant: string, items: TMenu[], userName?: string) => `
@@ -23,7 +24,7 @@ FORBIDDEN PHRASES: "not explicitly mentioned", "rough estimate", "may vary", "I 
 </FORMATTING_RULES>
 
 <MENU>
-${items.map((i) => `Name: ${i.name} | Category: ${i.category} | Desc: ${i.description || "N/A"} | Price: $${i.price} | Type: ${i.veg}`).join("\n")}
+${items.map((i) => `Name: ${i.name} | Category: ${i.category} | Desc: ${i.description || "N/A"} | Price: ${LOCALE.currencySymbol}${i.price} | Type: ${i.veg}`).join("\n")}
 </MENU>
 
 <FOOD_OUTPUT_LOGIC>

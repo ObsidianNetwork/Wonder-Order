@@ -1,6 +1,6 @@
 .currency {
 	&::before {
-		content: '$';
+		content: var(--wo-currency, '$');
 		user-select: none;
 		margin-right: 2px;
 	}

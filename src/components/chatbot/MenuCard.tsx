@@ -20,7 +20,7 @@ export function MenuCard({ item }: MenuCardProps) {
 				<p className="cardSubtitle">
 					{item.veg && <Icon className={`vegBadge ${item.veg}`} code={VEG_ICON_CODE[item.veg]} type="solid" size={12} />}
 					{item.veg && <span className="separator">•</span>}
-					<span>${item.price}</span>
+					<span className="currency">{item.price}</span>
 				</p>
 			</div>
 		</button>

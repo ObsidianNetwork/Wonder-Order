@@ -1,0 +1,96 @@
+.restaurantHome {
+	position: absolute;
+	inset: 0;
+	overflow-y: auto;
+	overflow-x: hidden;
+	-webkit-overflow-scrolling: touch;
+
+	.heroSection {
+		position: relative;
+		height: 100dvh;
+		min-height: 450px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		.heroBg {
+			position: absolute;
+			inset: -30%;
+			background-size: cover;
+			background-position: center;
+			background-color: var(--wo-surface-2);
+			will-change: transform;
+		}
+
+		.heroOverlay {
+			position: absolute;
+			inset: 0;
+			background: linear-gradient(to bottom, rgb(0 0 0 / 20%) 0%, rgb(0 0 0 / 60%) 100%);
+		}
+
+		.heroContent {
+			position: relative;
+			z-index: 1;
+			text-align: center;
+			padding: 0 var(--wo-page-padding);
+
+			.heroAvatar {
+				width: 72px;
+				height: 72px;
+				border-radius: 50%;
+				overflow: hidden;
+				margin: 0 auto 1.25rem;
+				border: 2px solid rgb(255 255 255 / 30%);
+
+				img {
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
+				}
+			}
+
+			.heroTitle {
+				font-size: clamp(2rem, 8vw, 4rem);
+				font-weight: 700;
+				color: white;
+				letter-spacing: -0.03em;
+				line-height: 1.1;
+				margin-bottom: 0.75rem;
+			}
+
+			.heroSubtitle {
+				font-size: clamp(0.85rem, 2.5vw, 1.05rem);
+				color: rgb(255 255 255 / 70%);
+				line-height: 1.5;
+				margin-bottom: 2rem;
+				max-width: 420px;
+				margin-inline: auto;
+			}
+		}
+	}
+
+	.homeFooter {
+		padding: 2.5rem var(--wo-page-padding) 1.5rem;
+		background: var(--wo-surface-0);
+		text-align: center;
+
+		.footerName {
+			font-size: 1rem;
+			font-weight: 600;
+			color: var(--wo-text-primary);
+			margin-bottom: 0.2rem;
+		}
+
+		.footerAddress {
+			font-size: 0.8rem;
+			color: var(--wo-text-secondary);
+			margin-bottom: 1.5rem;
+		}
+
+		.footerPowered {
+			font-size: 0.7rem;
+			color: var(--wo-text-muted);
+			opacity: 0.5;
+		}
+	}
+}

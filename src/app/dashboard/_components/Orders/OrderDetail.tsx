@@ -98,7 +98,7 @@ const OrderDetail = (props: TOrderDetailProps) => {
 					</div>
 					{data?.orderTotal && (
 						<div className="total">
-							<Icon code="e1bc" type="solid" size={16} />
+							<span className="currency" />
 							{data?.orderTotal}
 						</div>
 					)}

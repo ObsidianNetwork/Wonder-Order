@@ -62,9 +62,18 @@ const OrderPage = () => {
 
 		params.set({ category: newCategory.join(",") });
 	};
+	const [showTableEntry, setShowTableEntry] = useState(false);
+	const [manualTable, setManualTable] = useState("");
+
 	const onLoginClick = () => {
 		if (table) return setLoginOpen(true);
-		return params.router.push("/scan");
+		return setShowTableEntry(true);
+	};
+	const onSetTable = () => {
+		if (manualTable.trim()) {
+			params.set({ table: manualTable.trim() });
+			setShowTableEntry(false);
+		}
 	};
 	const increaseProductQuantity = (product: TMenuCustom) => {
 		const selection = [...selectedProducts];
@@ -119,8 +128,8 @@ const OrderPage = () => {
 	}, [filteredProducts]);
 
 	useEffect(() => {
-		if (session.data?.role === "customer") setOrderHeading(["Choose", "Order"]);
-		else setOrderHeading(["Explore", "Menu"]);
+		if (session.data?.role === "customer") setOrderHeading(["Your", "Order"]);
+		else setOrderHeading(["Our", "Menu"]);
 	}, [session]);
 
 	useEffect(() => {
@@ -136,9 +145,7 @@ const OrderPage = () => {
 					</h1>
 					<div className="options">
 						<SearchButton setSearchActive={setSearchActive} placeholder="Search menu" value={searchValue} setValue={setSearchValue} />
-						{(!session.data?.role || !showOrderButton) && (
-							<Button className="loginButton" label={showOrderButton ? "Order" : "Scan"} onClick={onLoginClick} />
-						)}
+						{(!session.data?.role || !showOrderButton) && <Button className="loginButton" label="Order" onClick={onLoginClick} />}
 						{eligibleToOrder && (
 							<Button
 								icon="e43b"
@@ -214,7 +221,7 @@ const OrderPage = () => {
 											decreaseQuantity={decreaseProductQuantity}
 											showInfo={item._id.toString() === showInfoCard.toString()}
 											setShowInfo={(v) => setShowInfoCard(v)}
-											show={!!item.image}
+											show={!item.image}
 											quantity={
 												(selectedProducts.some((obj) => obj._id === item._id) &&
 													selectedProducts?.find((obj) => obj._id === item._id)?.quantity) ||
@@ -243,6 +250,27 @@ const OrderPage = () => {
 			</SideSheet>
 			<Modal open={loginOpen} setOpen={setLoginOpen}>
 				<UserLogin setOpen={setLoginOpen} />
+			</Modal>
+			<Modal open={showTableEntry} setOpen={setShowTableEntry}>
+				<div className="tableEntryModal">
+					<h3>Select Your Table</h3>
+					<p>Enter your table number or scan the QR code on your table</p>
+					<div className="tableEntryInput">
+						<input
+							type="number"
+							placeholder="Table number"
+							value={manualTable}
+							onChange={(e) => setManualTable(e.target.value)}
+							onKeyDown={(e) => e.key === "Enter" && onSetTable()}
+							min={1}
+						/>
+						<Button label="Go" onClick={onSetTable} />
+					</div>
+					<div className="tableEntryDivider">
+						<span>or</span>
+					</div>
+					<Button label="Scan QR Code" type="secondary" icon="f029" iconType="solid" onClick={() => params.router.push("/scan")} />
+				</div>
 			</Modal>
 		</div>
 	);

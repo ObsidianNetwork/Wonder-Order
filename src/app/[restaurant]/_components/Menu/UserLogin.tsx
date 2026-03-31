@@ -1,50 +1,89 @@
 import { usePathname, useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
 import type { ChangeEvent } from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { toast } from "react-toastify";
 import { Button, Textfield } from "xtreme-ui";
 
 import "./userLogin.scss";
 
-const mobileNumberPattern = /^(\+61[-\s]?)?[2-9]\d{8}$/;
+const phonePattern = /^\+?\d{7,15}$/;
+
+function detectCountry(): { code: string; dial: string; flag: string } {
+	const tz = Intl.DateTimeFormat().resolvedOptions().timeZone ?? "";
+	const tzMap: Record<string, { code: string; dial: string }> = {
+		Australia: { code: "AU", dial: "61" },
+		"America/New_York": { code: "US", dial: "1" },
+		"America/Chicago": { code: "US", dial: "1" },
+		"America/Denver": { code: "US", dial: "1" },
+		"America/Los_Angeles": { code: "US", dial: "1" },
+		"Europe/London": { code: "GB", dial: "44" },
+		"Europe/Berlin": { code: "DE", dial: "49" },
+		"Europe/Paris": { code: "FR", dial: "33" },
+		"Asia/Tokyo": { code: "JP", dial: "81" },
+		"Asia/Shanghai": { code: "CN", dial: "86" },
+		"Asia/Kolkata": { code: "IN", dial: "91" },
+		"Asia/Singapore": { code: "SG", dial: "65" },
+		"Pacific/Auckland": { code: "NZ", dial: "64" },
+		"America/Toronto": { code: "CA", dial: "1" },
+	};
+
+	let match = { code: "AU", dial: "61" };
+	for (const [key, val] of Object.entries(tzMap)) {
+		if (tz.startsWith(key) || tz === key) {
+			match = val;
+			break;
+		}
+	}
+
+	const flag = Array.from(match.code).map((c) => String.fromCodePoint(0x1f1e6 + c.charCodeAt(0) - 65)).join("");
+	return { ...match, flag };
+}
+
 const UserLogin = ({ setOpen }: UserLoginProps) => {
 	const pathname = usePathname();
 	const params = useSearchParams();
-	const [page, setPage] = useState("phone");
+	const [step, setStep] = useState<"phone" | "details">("phone");
 	const [buttonLabel, setButtonLabel] = useState("Next");
 	const [busy, setBusy] = useState(false);
 
-	const [dialCode] = useState("61");
+	const country = useMemo(() => detectCountry(), []);
 	const [phone, setPhone] = useState("");
-
 	const [fname, setFName] = useState("");
 	const [lname, setLName] = useState("");
 	const [heading, setHeading] = useState(["Let's", " start ordering"]);
 
-	const phoneNumber = `+${dialCode}${phone}`;
+	const getFullPhone = () => {
+		const trimmed = phone.trim();
+		if (trimmed.startsWith("+")) return trimmed;
+		const stripped = trimmed.startsWith("0") ? trimmed.slice(1) : trimmed;
+		return `+${country.dial}${stripped}`;
+	};
+
 	const onNext = async () => {
-		if (page === "phone") {
-			if (!mobileNumberPattern.test(phoneNumber)) {
+		if (step === "phone") {
+			const fullPhone = getFullPhone();
+			if (!phonePattern.test(fullPhone)) {
 				return toast.error("Please enter a valid phone number");
 			}
-
 			setBusy(true);
 			setTimeout(() => {
 				setBusy(false);
-				setPage("signOTP");
-			}, 400);
-		} else if (page === "signOTP" || page === "loginOTP") {
-			if (!params.get("table")) return toast.error("Please scan the QR Code");
+				setStep("details");
+			}, 300);
+		} else {
+			if (!params.get("table")) return toast.error("No table selected");
+			if (!fname.trim()) return toast.error("First name is required");
+			if (!lname.trim()) return toast.error("Last name is required");
 
 			setBusy(true);
 
 			const res = await signIn("customer", {
 				redirect: false,
 				restaurant: pathname.replaceAll("/", ""),
-				phone: phoneNumber,
-				fname,
-				lname,
+				phone: getFullPhone(),
+				fname: fname.trim(),
+				lname: lname.trim(),
 				table: params.get("table"),
 				callbackUrl: `${window.location.origin}`,
 			});
@@ -58,20 +97,17 @@ const UserLogin = ({ setOpen }: UserLoginProps) => {
 	};
 
 	useEffect(() => {
-		if (page === "phone") {
+		if (step === "phone") {
 			setHeading(["Let's", " start ordering"]);
 			setButtonLabel("Next");
-		} else if (page === "signOTP") {
-			setHeading(["Glad to", " see you here"]);
-			setButtonLabel("Order");
-		} else if (page === "loginOTP") {
-			setHeading(["Welcome", " back User"]);
-			setButtonLabel("Log In");
+		} else {
+			setHeading(["Almost", " there"]);
+			setButtonLabel("Start Ordering");
 		}
-	}, [page]);
+	}, [step]);
 
 	return (
-		<div className={`userLogin ${page}`}>
+		<div className={`userLogin ${step}`}>
 			<div className="header">
 				<span className="heading">
 					<span>{heading[0]}</span>
@@ -79,16 +115,22 @@ const UserLogin = ({ setOpen }: UserLoginProps) => {
 				</span>
 			</div>
 			<div className="content">
-				<Textfield
-					id="user-login-phone"
-					className="phone"
-					type="phone"
-					autoComplete="tel-local"
-					value={phone}
-					onEnterKey={onNext}
-					onChange={(e: ChangeEvent<HTMLInputElement>) => setPhone(e.target.value)}
-				/>
-				<div className="otpContainer">
+				<div className="phoneInput">
+					<div className="phonePrefix">
+						<span className="flag">{country.flag}</span>
+						<span className="dialCode">+{country.dial}</span>
+					</div>
+					<input
+						id="user-login-phone"
+						type="tel"
+						placeholder="Phone number"
+						autoComplete="tel"
+						value={phone}
+						onKeyDown={(e) => e.key === "Enter" && onNext()}
+						onChange={(e) => setPhone(e.target.value)}
+					/>
+				</div>
+				<div className="nameContainer">
 					<Textfield
 						id="user-login-fname"
 						className="fName"

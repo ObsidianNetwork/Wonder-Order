@@ -15,7 +15,12 @@ export async function POST(req: Request) {
 		if (!session) throw { status: 401, message: "Authentication Required" };
 		if (!body?.products.length) throw { status: 400, message: "Can't place order on empty cart" };
 
-		const { Menus, Orders } = await getTenantFromSession(session);
+		const { Menus, Orders, Profiles } = await getTenantFromSession(session);
+
+		// Check if restaurant has auto-accept enabled
+		const profile = await Profiles.findOne({ restaurantID: session?.restaurant?.username });
+		const autoAccept = profile?.autoAcceptOrders ?? false;
+
 		const products: TProduct[] = await Promise.all(
 			body?.products?.map(async (product: TProduct & { _id: string }) => {
 				const menuItem = await Menus.findById<TMenu>(product?._id).lean();
@@ -26,6 +31,7 @@ export async function POST(req: Request) {
 					quantity: product?.quantity,
 					price: menuItem?.price,
 					tax: ((menuItem?.price * menuItem?.taxPercent) / 100).toFixed(2),
+					adminApproved: autoAccept,
 				};
 			}),
 		);

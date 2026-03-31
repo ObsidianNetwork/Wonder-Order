@@ -14,6 +14,7 @@ export const ProfileSchema = new Schema<TProfile>(
 			l: { type: Number, trim: true, min: 0, max: 100 },
 		},
 		gstInclusive: { type: Boolean, default: false },
+		autoAcceptOrders: { type: Boolean, default: false },
 		categories: [{ type: String, trim: true, lowercase: true, match: /^[^,]*$/ }],
 		avatar: { type: String, trim: true },
 		cover: { type: String, trim: true },
@@ -36,5 +37,6 @@ export type TProfile = HydratedDocument<{
 	photos: Array<string>;
 	themeColor: TThemeColor;
 	gstInclusive: boolean;
+	autoAcceptOrders: boolean;
 	categories: Array<string>;
 }>;

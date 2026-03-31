@@ -1,9 +1,12 @@
+import { getServerSession } from "next-auth";
+
 import connectDB from "#utils/database/connect";
 import { Accounts } from "#utils/database/models/account";
 import { Kitchens } from "#utils/database/models/kitchen";
 import { Menus } from "#utils/database/models/menu";
 import { Profiles } from "#utils/database/models/profile";
 import { Tables } from "#utils/database/models/table";
+import { authOptions } from "#utils/helper/authHelper";
 import { CatchNextResponse } from "#utils/helper/common";
 
 import empire from "./_data/empire/empire";
@@ -54,8 +57,13 @@ const createData = async (props: TDocumentData) => {
 };
 
 export async function GET() {
-	await connectDB();
 	try {
+		const session = await getServerSession(authOptions);
+		if (!session || session.role !== "admin") {
+			return new Response(JSON.stringify({ message: "Admin access required" }), { status: 403 });
+		}
+
+		await connectDB();
 		const start = performance.now();
 		const deleteResult = await deleteData(["empire", "starbucks"]);
 		const [empireResult, starbucksResult] = await Promise.all([createData(empire), createData(starbucks)]);

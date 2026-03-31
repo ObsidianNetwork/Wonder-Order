@@ -9,8 +9,8 @@ const Veg = ["veg", "non-veg", "contains-egg"] as const;
 
 const MenuSchema = new mongoose.Schema<TMenu>(
 	{
-		name: { type: String, trim: true, unique: true, required: true, sparse: true, index: { unique: true } },
-		restaurantID: { type: String, trim: true, lowercase: true, required: true },
+		name: { type: String, trim: true, required: true },
+		restaurantID: { type: String, trim: true, lowercase: true, required: true, index: true },
 		description: { type: String, trim: true },
 		category: { type: String, trim: true, lowercase: true },
 		price: { type: Number, trim: true, required: true },
@@ -22,6 +22,8 @@ const MenuSchema = new mongoose.Schema<TMenu>(
 	},
 	{ timestamps: true },
 );
+
+MenuSchema.index({ name: 1, restaurantID: 1 }, { unique: true });
 
 MenuSchema.pre("save", async function () {
 	let account = accountCache.get(this.restaurantID);

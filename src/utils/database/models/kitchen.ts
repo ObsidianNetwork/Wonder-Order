@@ -10,7 +10,7 @@ const KitchenSchema = new mongoose.Schema<TKitchen>(
 	{
 		username: { type: String, trim: true, unique: true, required: true, sparse: true, index: { unique: true } },
 		password: { type: String, required: true },
-		restaurantID: { type: String, trim: true, lowercase: true, required: true },
+		restaurantID: { type: String, trim: true, lowercase: true, required: true, index: true },
 	},
 	{ timestamps: true },
 );

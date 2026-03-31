@@ -1,0 +1,7 @@
+.currency {
+	&::before {
+		content: '$';
+		user-select: none;
+		margin-right: 2px;
+	}
+}

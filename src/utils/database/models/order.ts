@@ -26,6 +26,10 @@ const OrderSchema = new mongoose.Schema<TOrder>(
 	{ timestamps: true },
 );
 
+OrderSchema.index({ restaurantID: 1 });
+OrderSchema.index({ state: 1 });
+OrderSchema.index({ restaurantID: 1, customer: 1, state: 1 });
+
 OrderSchema.pre("save", function () {
 	this.orderTotal = 0;
 	this.taxTotal = 0;

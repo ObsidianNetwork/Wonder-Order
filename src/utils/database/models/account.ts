@@ -16,9 +16,9 @@ const AccountSchema = new mongoose.Schema<TAccount>(
 		accountActive: { type: Boolean, default: true },
 		subscriptionActive: { type: Boolean, default: true },
 		profile: { type: mongoose.Schema.Types.ObjectId, ref: "profiles", unique: true },
-		kitchens: [{ type: mongoose.Schema.Types.ObjectId, ref: "kitchens", unique: true }],
-		tables: [{ type: mongoose.Schema.Types.ObjectId, ref: "tables", unique: true }],
-		menus: [{ type: mongoose.Schema.Types.ObjectId, ref: "menus", unique: true }],
+		kitchens: [{ type: mongoose.Schema.Types.ObjectId, ref: "kitchens" }],
+		tables: [{ type: mongoose.Schema.Types.ObjectId, ref: "tables" }],
+		menus: [{ type: mongoose.Schema.Types.ObjectId, ref: "menus" }],
 	},
 	{ timestamps: true },
 );

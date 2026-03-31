@@ -94,7 +94,7 @@ const OrdersCard = (props: TOrdersCard) => {
 				{!data?.products?.length ? (
 					<p className="noContent">No orders yet</p>
 				) : (
-					<p className="total rupee" onClick={() => showDetails?.(true)}>
+					<p className="total currency" onClick={() => showDetails?.(true)}>
 						{data?.orderTotal}
 					</p>
 				)}

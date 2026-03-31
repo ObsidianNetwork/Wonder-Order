@@ -1,3 +1,4 @@
+import DOMPurify from "dompurify";
 import { memo, type RefObject } from "react";
 import { Icon } from "xtreme-ui";
 import type { ChatMessage } from "../../types/chat";
@@ -27,7 +28,7 @@ export const MessageList = memo(({ messages, isLoading, bottomRef, onResizeStart
 										<Icon code="f4fb" set="duotone" type="solid" size={34} />
 									</div>
 									<div className="headerText">
-										<span className="assistantName">Jarvis</span>
+										<span className="assistantName">Wonder</span>
 										<span className="messageTime">
 											{new Intl.DateTimeFormat("default", {
 												hour: "numeric",
@@ -39,7 +40,7 @@ export const MessageList = memo(({ messages, isLoading, bottomRef, onResizeStart
 								</div>
 
 								<div className="assistantBody">
-									{message.content && <div className="assistantText" dangerouslySetInnerHTML={{ __html: message.content }} />}
+									{message.content && <div className="assistantText" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(message.content) }} />}
 									{message.toolResults && message.toolResults.length > 0 && (
 										<div className="menuSuggestions">
 											{message.toolResults.map((items, idx) => (

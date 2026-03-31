@@ -65,12 +65,6 @@ const CartPage = (props: TCartPageProps) => {
 		if (order?.table && order?.table !== table) cancelAndSignout();
 	}, [cancelOrder, order, table]);
 
-	// useEffect(() => {
-	// 	if (userOrderEnd) {
-	// 		setSideSheetHeading(['Order', 'Invoice']);
-	// 	}
-	// }, [userOrderEnd, setSideSheetHeading]);
-
 	if (!props.selectedProducts.length && !order?.products?.length) {
 		return (
 			<div className="cartPage">
@@ -132,8 +126,8 @@ const CartPage = (props: TCartPageProps) => {
 							) : (
 								<>
 									<p>Sub Total</p>
-									<span className="totalValue rupee">{order?.orderTotal} </span>
-									{order?.orderTotal && <span className="plusTaxes"> + ₹{order?.taxTotal} Tax</span>}
+									<span className="totalValue currency">{order?.orderTotal} </span>
+									{order?.orderTotal && <span className="plusTaxes"> + ${order?.taxTotal} Tax</span>}
 								</>
 							)}
 						</div>

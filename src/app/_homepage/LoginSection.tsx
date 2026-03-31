@@ -108,7 +108,7 @@ const LoginSection = () => {
 					<div className="header">
 						{(session.data?.role === "admin" || session.data?.role === "kitchen") && profileLoading ? (
 							<div className="details">
-								<p className="name"> OrderWorder</p>
+								<p className="name"> Wonder-Order</p>
 							</div>
 						) : (
 							<>

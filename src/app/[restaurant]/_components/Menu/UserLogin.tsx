@@ -7,7 +7,7 @@ import { Button, Textfield } from "xtreme-ui";
 
 import "./userLogin.scss";
 
-const mobileNumberPattern = /^(\+91[-\s]?)?[6-9]\d{9}$/;
+const mobileNumberPattern = /^(\+61[-\s]?)?[2-9]\d{8}$/;
 const UserLogin = ({ setOpen }: UserLoginProps) => {
 	const pathname = usePathname();
 	const params = useSearchParams();
@@ -15,7 +15,7 @@ const UserLogin = ({ setOpen }: UserLoginProps) => {
 	const [buttonLabel, setButtonLabel] = useState("Next");
 	const [busy, setBusy] = useState(false);
 
-	const [dialCode] = useState("91");
+	const [dialCode] = useState("61");
 	const [phone, setPhone] = useState("");
 
 	const [fname, setFName] = useState("");
@@ -106,13 +106,6 @@ const UserLogin = ({ setOpen }: UserLoginProps) => {
 						value={lname}
 						onChange={(e: ChangeEvent<HTMLInputElement>) => setLName(e.target.value)}
 					/>
-					{/* <Textfield
-						className='otp'
-						placeholder='Enter Your otp'
-						autoComplete='one-time-code'
-						value={otp}
-						onChange={(e) => setOtp(e.target.value)}
-					/> */}
 				</div>
 			</div>
 			<div className="footer">

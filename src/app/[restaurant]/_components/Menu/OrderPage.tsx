@@ -204,10 +204,10 @@ const OrderPage = () => {
 							<div className={`itemContainer ${!eligibleToOrder ? "restrictOrder " : ""}`}>
 								<div>
 									{filteredProducts?.map(
-										(item, key) =>
+										(item) =>
 											!item.hidden && (
 												<MenuCard
-													key={key}
+													key={item._id.toString()}
 													item={item}
 													restrictOrder={!eligibleToOrder}
 													increaseQuantity={increaseProductQuantity}
@@ -230,9 +230,9 @@ const OrderPage = () => {
 						{hasNonImageItems && (
 							<div className={`itemContainer withoutImage ${!eligibleToOrder ? "restrictOrder " : ""}`}>
 								<div>
-									{filteredProducts?.map((item, key) => (
+									{filteredProducts?.map((item) => (
 										<MenuCard
-											key={key}
+											key={item._id.toString()}
 											item={item}
 											restrictOrder={!eligibleToOrder}
 											increaseQuantity={increaseProductQuantity}

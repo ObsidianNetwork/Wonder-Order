@@ -11,7 +11,7 @@ export async function POST(req: Request) {
 		if (!restaurantId) return Response.json({ text: "Restaurant ID is required", toolResults: [] }, { status: 400 });
 
 		const session = await getServerSession(authOptions);
-		if (!session) return Response.json({ text: "Please login to chat with Jarvis", toolResults: [] }, { status: 401 });
+		if (!session) return Response.json({ text: "Please login to chat with Wonder", toolResults: [] }, { status: 401 });
 
 		const name = restaurantId.replace(/\b\w/g, (c: string) => c.toUpperCase()).replace(/[-_]/g, " ");
 		const account = await getRestaurantData(restaurantId).catch(() => null);

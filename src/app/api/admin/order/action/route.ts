@@ -18,7 +18,7 @@ export async function POST(req: Request) {
 
 		await connectDB();
 
-		const order = await Orders.findById<TOrder>(body?.orderID);
+		const order = await Orders.findOne<TOrder>({ _id: body?.orderID, restaurantID: session.username });
 
 		if (!order) throw { status: 400, message: `Order with id: ${body?.orderID} not found` };
 

@@ -14,7 +14,7 @@ const navItems = [
 export async function generateMetadata({ searchParams }: IMetaDataProps) {
 	const s = await searchParams;
 	return {
-		title: `OrderWorder${s.tab ? ` • ${capitalize(s.tab)}` : ""}`,
+		title: `Wonder-Order${s.tab ? ` • ${capitalize(s.tab)}` : ""}`,
 	};
 }
 

@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { GlobalProvider } from "#components/context";
 import { montserrat } from "#utils/helper/fontHelper";
 import { SITE_DESCRIPTION, SITE_KEYWORDS, SITE_NAME, SITE_URL } from "#utils/seo/constants";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./tailwind.css";
 import "./globals.scss";
 
@@ -32,9 +33,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: IRootProps) {
 	return (
 		<html lang="en" className={montserrat.variable} suppressHydrationWarning>
-			<head>
-				<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossOrigin="anonymous" />
-			</head>
+			<head />
 			<body>
 				<GlobalProvider>{children}</GlobalProvider>
 			</body>

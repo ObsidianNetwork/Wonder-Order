@@ -1,13 +1,9 @@
 .restaurantHome {
 	position: absolute;
 	inset: 0;
-	overflow-y: auto;
-	overflow-x: hidden;
-	-webkit-overflow-scrolling: touch;
 
 	.heroSection {
 		position: relative;
-		height: 100dvh;
 		min-height: 450px;
 		display: flex;
 		align-items: center;

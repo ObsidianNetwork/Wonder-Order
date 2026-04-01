@@ -1,7 +1,7 @@
-import { useRouter } from "next/navigation";
 import { type Dispatch, type MouseEvent, type SetStateAction, useEffect, useRef, useState } from "react";
 import { Button, useXTheme } from "xtreme-ui";
 
+import { APP } from "#utils/config/constants";
 import { scrollToSection } from "#utils/helper/common";
 
 import "./landingSection.scss";
@@ -12,8 +12,8 @@ const bgImg = "/backgrounds/landingCover.png";
 const overlayImg = "/backgrounds/landingCoverOverlay.png";
 const maxBlurPerImage = 30;
 const maxOverlayTranslate = 0.3;
+
 const LandingSection = () => {
-	const router = useRouter();
 	const { isDarkTheme } = useXTheme();
 	const ref = useRef<HTMLDivElement>(null);
 	const [blurBackground, setBlurBackground] = useState<number>(maxBlurPerImage);
@@ -44,18 +44,19 @@ const LandingSection = () => {
 	}, []);
 
 	return (
-		<section className={clsx("landingSection", isDarkTheme && "dark")} id="homepage" style={{ filter: `blur(${blurBackground + blurOverlay}px)` }}>
-			<div className="coverBackground" style={{ backgroundImage: `url(${bgImg})` }} />
+		<section className={clsx("landingSection snapSection", isDarkTheme && "dark")} id="homepage" style={{ filter: `blur(${blurBackground + blurOverlay}px)` }}>
+			<div className="coverBackground parallaxBg" style={{ backgroundImage: `url(${bgImg})` }} />
 			<div ref={ref} className="coverOverlay" onMouseMove={onMouseMove} style={{ backgroundImage: `url(${overlayImg})` }} />
 			<div className="overlay" />
-			<div className="landingGreeting">
-				<h1 className="head">Revolutionizing</h1>
-				<p className="subHead">Dining Experience</p>
-				<p className="desc">Gone are the days of complex ordering systems and outdated</p>
-				<p className="desc">paper menus. It&apos;s time for the new normal, Wonder-Order</p>
+			<div className="landingGreeting scrollRevealStagger">
+				<h1 className="head">{APP.tagline.split(" ")[0]}</h1>
+				<p className="subHead">{APP.tagline.split(" ").slice(1).join(" ")}</p>
+				<p className="desc">Modern contactless ordering for restaurants.</p>
+				<p className="desc">QR codes, live menus, instant kitchen updates.</p>
 				<div className="greetingAction">
-					<Button label="Learn more" type="secondary" onClick={() => scrollToSection("homepage-aboutus")} />
-					<Button label="Order now" onClick={() => router.push("/scan")} />
+					<button type="button" className="heroSignIn" onPointerUp={() => scrollToSection("homepage-login")}>
+						Sign In
+					</button>
 				</div>
 			</div>
 		</section>

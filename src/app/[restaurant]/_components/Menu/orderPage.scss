@@ -16,6 +16,8 @@
 		flex-grow: 1;
 		background-color: var(--wo-surface-0);
 		overflow-y: auto;
+		scroll-behavior: smooth;
+		-webkit-overflow-scrolling: touch;
 
 		.mainHeader {
 			position: fixed;

@@ -28,7 +28,7 @@ export default async function Homepage() {
 					description: SITE_DESCRIPTION,
 					applicationCategory: "BusinessApplication",
 					operatingSystem: "Web",
-					offers: { "@type": "Offer", price: "0", priceCurrency: "INR" },
+					offers: { "@type": "Offer", price: "0", priceCurrency: "AUD" },
 					publisher: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
 				}}
 			/>

@@ -1,17 +1,21 @@
 "use client";
 
-import { type UIEvent, useState } from "react";
+import { type UIEvent, useRef, useState } from "react";
 import { Button } from "xtreme-ui";
 
 import { useRestaurant } from "#components/context/useContext";
 import { useQueryParams } from "#utils/hooks/useQueryParams";
+import { useScrollReveal } from "#utils/hooks/useScrollReveal";
 
 import "./restaurantHome.scss";
 
 const RestaurantHome = () => {
 	const { restaurant } = useRestaurant();
 	const params = useQueryParams();
+	const scrollRef = useRef<HTMLDivElement>(null);
 	const [parallaxY, setParallaxY] = useState(0);
+
+	useScrollReveal(scrollRef);
 
 	const profile = restaurant?.profile;
 
@@ -20,11 +24,14 @@ const RestaurantHome = () => {
 	};
 
 	return (
-		<div className="restaurantHome" onScroll={onScroll}>
-			<section className="heroSection">
-				<div className="heroBg" style={{ transform: `translateY(${parallaxY}px)`, backgroundImage: profile?.cover ? `url(${profile.cover})` : undefined }} />
+		<div className="restaurantHome snapScroll" ref={scrollRef} onScroll={onScroll}>
+			<section className="heroSection snapSection">
+				<div
+					className="heroBg parallaxBg"
+					style={{ transform: `translateY(${parallaxY}px)`, backgroundImage: profile?.cover ? `url(${profile.cover})` : undefined }}
+				/>
 				<div className="heroOverlay" />
-				<div className="heroContent">
+				<div className="heroContent scrollRevealStagger">
 					{profile?.avatar && (
 						<div className="heroAvatar">
 							{/* biome-ignore lint/performance/noImgElement: Restaurant logo */}
@@ -39,7 +46,7 @@ const RestaurantHome = () => {
 				</div>
 			</section>
 
-			<footer className="homeFooter">
+			<footer className="homeFooter snapSectionAuto">
 				<p className="footerName">{profile?.name}</p>
 				{profile?.address && <p className="footerAddress">{profile.address}</p>}
 				<p className="footerPowered">Powered by Wonder-Order</p>

@@ -79,6 +79,19 @@
 			gap: 16px;
 			justify-content: flex-end;
 			pointer-events: all;
+
+			.heroSignIn {
+				padding: 0.7rem 2rem;
+				border-radius: var(--wo-radius-full);
+				border: none;
+				background: hsl(var(--colorBrandPrimary));
+				color: white;
+				font-size: 0.95rem;
+				font-weight: 600;
+				font-family: inherit;
+				cursor: pointer;
+				touch-action: manipulation;
+			}
 		}
 	}
 }

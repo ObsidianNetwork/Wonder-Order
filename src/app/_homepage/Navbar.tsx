@@ -1,4 +1,5 @@
 import { ThemeSelect } from "xtreme-ui";
+import { APP } from "#utils/config/constants";
 import { scrollToSection } from "#utils/helper/common";
 import "./navbar.scss";
 
@@ -6,7 +7,7 @@ export default function Navbar({ menuOpen, setMenuOpen }: TNavBarProps) {
 	return (
 		<div className="homeNavbar" id="homepage-navBar">
 			<div className="logo" onClick={() => scrollToSection()}>
-				ORDER WORDER
+				{APP.name}
 			</div>
 			<div className={`menu ${menuOpen ? "open" : ""}`}>
 				<div className="icon round" onClick={() => setMenuOpen(!menuOpen)}>
@@ -14,19 +15,14 @@ export default function Navbar({ menuOpen, setMenuOpen }: TNavBarProps) {
 					<span className="line2" />
 				</div>
 				<div className="container">
-					{["About Us", "Features"].map((item, key) => {
-						return (
-							<div
-								key={key}
-								className="item"
-								onClick={() => {
-									scrollToSection(`homepage-${item.toLowerCase().replace(/ /g, "")}`);
-									setMenuOpen(false);
-								}}>
-								<p>{item}</p>
-							</div>
-						);
-					})}
+					<div
+						className="item"
+						onClick={() => {
+							scrollToSection("homepage-login");
+							setMenuOpen(false);
+						}}>
+						<p>Sign In</p>
+					</div>
 				</div>
 				<ThemeSelect size="mini" withSwatch withScheme />
 			</div>

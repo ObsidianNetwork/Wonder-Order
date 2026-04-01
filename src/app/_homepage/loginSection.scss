@@ -1,267 +1,81 @@
 .loginSection {
 	position: relative;
-	width: 100dvw;
+	width: 100%;
+	min-height: 100dvh;
+	scroll-snap-align: start;
 	display: flex;
-	justify-content: center;
 	align-items: center;
-	padding: 12rem 0 30rem 0;
+	justify-content: center;
+	padding: 4rem var(--wo-page-padding);
+	background: var(--wo-surface-0);
 
-	.loginAnim {
-		flex: 1;
-		display: flex;
-		justify-content: center;
-		align-items: center;
+	.loginBox {
+		width: 100%;
+		max-width: 380px;
+		padding: 2rem;
+		border-radius: var(--wo-radius-xl);
+		background: var(--wo-surface-1);
+		border: 1px solid var(--wo-surface-border);
+		box-shadow: var(--wo-shadow-lg);
 
-		.welcomeAnim {
-			width: 80%;
-			height: 80%;
-		}
-	}
-
-	.loginContainer {
-		width: 50%;
-		min-width: 600px;
-		margin-right: 50px;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		perspective: 1000px;
-		transform-style: preserve-3d;
-		transition: all var(--animDurSlow) var(--cubicBezierPrimary);
-
-		&.profile {
-			transform: rotateY(180deg);
-
-			.loginCard {
-				&.front {
-					pointer-events: none;
-				}
-
-				&.back {
-					pointer-events: all;
-				}
-			}
+		.loginHeading {
+			font-size: 1.3rem;
+			font-weight: 600;
+			color: var(--wo-text-primary);
+			margin-bottom: 1.25rem;
 		}
 
-		.loginCard {
-			position: absolute;
-			width: 500px;
-			border-radius: var(--wo-radius-xl);
-			box-shadow: var(--wo-shadow-lg);
-			padding: 28px;
+		.loginForm {
 			display: flex;
 			flex-direction: column;
-			justify-content: center;
-			align-items: center;
-			overflow: hidden;
-			background-color: var(--wo-surface-1);
-			backface-visibility: hidden;
-			transition: all var(--animDurSlow) var(--cubicBezierPrimary);
+			gap: 0.75rem;
 
-			.logout {
-				position: absolute;
-				right: 0;
-			}
-
-			.inputContainer {
-				--inputHeight: 50px;
-
-				position: relative;
-				width: 100%;
-				margin: 30px 0;
-				display: flex;
-				flex-direction: column;
-				gap: 12px;
-
-				.email,
-				.username,
-				.password {
-					--iconSize: var(--inputHeight);
-
-					position: relative;
-					width: 100%;
-
-					.label {
-						margin-left: 12px !important;
-					}
-				}
-
-				.username {
-					height: 0;
-					opacity: 0;
-					transition: all var(--animDurFast) var(--cubicBezierPrimary);
-
-					&.show {
-						height: 40px;
-						opacity: 1;
-					}
-				}
-			}
-
-			.loginAction {
-				width: 100%;
+			.loginActions {
 				display: flex;
 				justify-content: space-between;
 				align-items: center;
-				padding-top: 8px;
-				gap: 8px;
+				margin-top: 0.25rem;
 
-				.kitchenMode {
-					&:not(.active) {
-						background: transparent;
-
-						span {
-							font-variation-settings:
-								'wdth' 75,
-								'wght' 600;
-						}
-					}
-				}
-
-				.next {
-					margin-left: auto;
+				.kitchenToggle {
+					font-size: 0.75rem;
 				}
 			}
+		}
 
-			.loggedInAction {
-				display: flex;
-				gap: 16px;
-				margin-top: 32px;
-			}
+		.loggedInState {
+			display: flex;
+			align-items: center;
+			gap: 1rem;
+			margin-bottom: 1.5rem;
 
-			&.front {
-				.header {
-					position: relative;
-					width: 100%;
-					display: flex;
-					flex-direction: column;
-					align-items: center;
-					justify-content: center;
-
-					> h3,
-					> h4 {
-						width: 100%;
-						font-size: 42px;
-						font-variation-settings:
-							'wdth' 75,
-							'wght' 300;
-						text-align: left;
-						user-select: none;
-						margin: 0;
-					}
-
-					> h4 {
-						font-size: 16px;
-						margin-top: 5px;
-					}
-				}
-			}
-
-			&.back {
-				pointer-events: none;
-				transform: rotateY(180deg);
-
-				.header {
-					position: relative;
-					width: 100%;
-					display: flex;
-					align-items: center;
-					gap: 16px;
-
-					.details {
-						display: flex;
-						flex-direction: column;
-						justify-content: center;
-						gap: 2px;
-
-						.name {
-							margin: 0;
-							font-size: 20px;
-							font-variation-settings:
-								'wdth' 75,
-								'wght' 600;
-						}
-
-						.address {
-							margin: 0;
-							font-size: 14px;
-							font-variation-settings:
-								'wdth' 75,
-								'wght' 400;
-						}
-					}
+			.loggedInInfo {
+				.loggedInName {
+					font-weight: 600;
+					font-size: 1.1rem;
+					color: var(--wo-text-primary);
 				}
 
-				.body {
-					width: 100%;
-					flex: 1;
+				.loggedInRole {
+					font-size: 0.8rem;
+					color: var(--wo-text-muted);
 				}
 			}
+		}
+
+		.loggedInActions {
+			display: flex;
+			flex-direction: column;
+			gap: 0.5rem;
 		}
 	}
 }
 
-@media (width <= 1100px) {
+@media (width <= 480px) {
 	.loginSection {
-		.loginContainer {
-			min-width: 500px;
+		padding: 3rem 1rem;
 
-			.loginCard {
-				transform: scale(0.9);
-			}
-		}
-	}
-}
-
-@media (width <= 830px) {
-	.loginSection {
-		flex-direction: column;
-
-		.loginAnim {
-			flex: 1;
-			justify-content: center;
-			align-items: flex-start;
-		}
-
-		.loginContainer {
-			margin: 0 0 220px;
-		}
-	}
-}
-
-@media (width <= 600px) {
-	.loginSection {
-		.loginAnim {
-			width: 90%;
-
-			.welcomeAnim {
-				margin: auto;
-				width: 100%;
-				height: 65%;
-			}
-		}
-
-		.loginContainer {
-			min-width: 100%;
-			margin: 0 0 135px;
-
-			.loginCard {
-				width: 100%;
-				border-radius: 40px 40px 0 0;
-				box-shadow: var(--wo-shadow-md);
-				transform: scale(1);
-			}
-		}
-	}
-}
-
-@media (width <= 430px) {
-	.loginSection {
-		.loginAnim {
-			.welcomeAnim {
-				height: 45%;
-			}
+		.loginBox {
+			padding: 1.5rem;
 		}
 	}
 }

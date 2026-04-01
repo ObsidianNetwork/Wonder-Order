@@ -1,0 +1,80 @@
+// Snap scroll container
+// Desktop: smooth free-scroll, no snap (mouse wheel feels natural)
+// Mobile: snap to sections (touch swipe feels intentional)
+.snapScroll {
+	height: 100dvh;
+	overflow-y: auto;
+	scroll-behavior: smooth;
+	-webkit-overflow-scrolling: touch;
+
+	scrollbar-width: none;
+	&::-webkit-scrollbar {
+		display: none;
+	}
+
+	// Only snap on touch devices
+	@media (hover: none) and (pointer: coarse) {
+		scroll-snap-type: y proximity;
+	}
+}
+
+// Snap section - full-viewport section
+.snapSection {
+	min-height: 100dvh;
+	scroll-snap-align: start;
+	position: relative;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+// Shorter sections
+.snapSectionAuto {
+	min-height: auto;
+	scroll-snap-align: start;
+	position: relative;
+	overflow: hidden;
+}
+
+// Parallax background layer
+.parallaxBg {
+	position: absolute;
+	inset: -30%;
+	background-size: cover;
+	background-position: center;
+	will-change: transform;
+	transition: none;
+}
+
+// Fade-in on scroll
+.scrollReveal {
+	opacity: 0;
+	transform: translateY(30px);
+	transition: opacity 0.6s ease, transform 0.6s ease;
+
+	&.visible {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+// Staggered reveal for child elements
+.scrollRevealStagger {
+	> * {
+		opacity: 0;
+		transform: translateY(20px);
+		transition: opacity 0.5s ease, transform 0.5s ease;
+
+		&.visible {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	@for $i from 1 through 10 {
+		> *:nth-child(#{$i}) {
+			transition-delay: #{$i * 0.08}s;
+		}
+	}
+}

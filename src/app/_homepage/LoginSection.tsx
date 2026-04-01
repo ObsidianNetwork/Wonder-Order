@@ -1,167 +1,126 @@
 import { useRouter } from "next/navigation";
 import { signIn, useSession } from "next-auth/react";
 import type { ChangeEvent } from "react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { toast } from "react-toastify";
-import { Avatar, Button, Lottie, Textfield, useXTheme } from "xtreme-ui";
+import { Avatar, Button, Textfield } from "xtreme-ui";
 
 import { useAdmin } from "#components/context/useContext";
-import { DEFAULT_THEME_COLOR, getAnimSrc } from "#utils/constants/common";
-import type { TProfile } from "#utils/database/models/profile";
 
 import "./loginSection.scss";
 
 const LoginSection = () => {
-	const { setThemeColor } = useXTheme();
 	const router = useRouter();
 	const session = useSession();
-	const { profile: dashboard, profileLoading } = useAdmin();
+	const { profile: dashboard } = useAdmin();
 	const loggedIn = session.status === "authenticated";
 
-	const [logoutLoading, setLogoutLoading] = useState(false);
-
-	const [profile, setProfile] = useState<TProfile>();
-	const [nextLoading, setNextLoading] = useState(false);
-
+	const [busy, setBusy] = useState(false);
 	const [email, setEmail] = useState("");
-	const [emailShake, setEmailShake] = useState(false);
-
+	const [password, setPassword] = useState("");
 	const [kitchenUsername, setKitchenUsername] = useState("");
 	const [showKitchen, setShowKitchen] = useState(false);
 
-	const [password, setPassword] = useState("");
-	const [passwordShake, setPasswordShake] = useState(false);
+	const onLogin = async () => {
+		if (!email.trim()) return toast.error("Email is required");
+		if (!password.trim()) return toast.error("Password is required");
+		setBusy(true);
 
-	const onNext = async () => {
-		setNextLoading(true);
-		if (!profile) {
-			const res = await fetch(`/api/baseProfile?email=${email}`);
-			const profile = await res.json();
+		// Try restaurant login first
+		const restaurantRes = await signIn("restaurant", {
+			redirect: false,
+			username: email,
+			...(showKitchen && { kitchen: kitchenUsername }),
+			password,
+		});
 
-			if (profile.status === 404) {
-				toast.error("Account does not exist!");
-				setEmailShake(true);
-				setTimeout(() => setEmailShake(false), 600);
-			} else {
-				setProfile(profile);
-			}
-		} else {
-			const res = await signIn("restaurant", {
-				redirect: false,
-				username: email,
-				...(showKitchen && { kitchen: kitchenUsername }),
-				password,
-				callbackUrl: `${window.location.origin}`,
-			});
-
-			if (res?.error) {
-				toast.error(res?.error);
-				setPassword("");
-				setPasswordShake(true);
-				setTimeout(() => setPasswordShake(false), 600);
-				return setNextLoading(false);
-			}
-
+		if (!restaurantRes?.error) {
 			if (kitchenUsername) router.push("/kitchen");
 			else router.push("/dashboard");
+			return;
 		}
-		setNextLoading(false);
-	};
-	const logout = () => {
-		setThemeColor(DEFAULT_THEME_COLOR);
-		if (!loggedIn) return setProfile(undefined);
-		setLogoutLoading(true);
-		router.push("/logout");
+
+		// If restaurant login fails, try platform login
+		const platformRes = await signIn("platform", {
+			redirect: false,
+			email,
+			password,
+		});
+
+		if (!platformRes?.error) {
+			router.push("/platform");
+			return;
+		}
+
+		toast.error("Invalid credentials");
+		setBusy(false);
 	};
 
-	useEffect(() => {
-		const newColor = profile?.themeColor ?? dashboard?.themeColor;
-		if (newColor) setThemeColor(profile?.themeColor ?? dashboard?.themeColor);
-	}, [profile, dashboard, setThemeColor]);
+	if (loggedIn) {
+		const role = session.data?.role;
+		const displayName = dashboard?.name ?? session.data?.username ?? "User";
+
+		return (
+			<section className="loginSection" id="homepage-login">
+				<div className="loginBox">
+					<div className="loggedInState">
+						{dashboard?.avatar && <Avatar src={dashboard.avatar} size="mini" />}
+						<div className="loggedInInfo">
+							<p className="loggedInName">{displayName}</p>
+							<p className="loggedInRole">{role === "platform_admin" ? "Platform Admin" : role === "kitchen" ? "Kitchen Staff" : "Restaurant Admin"}</p>
+						</div>
+					</div>
+					<div className="loggedInActions">
+						{role === "platform_admin" && <Button label="Platform Dashboard" onClick={() => router.push("/platform")} />}
+						{role === "admin" && <Button label="Dashboard" onClick={() => router.push("/dashboard")} />}
+						{(role === "admin" || role === "kitchen") && <Button label="Kitchen" type="secondary" onClick={() => router.push("/kitchen")} />}
+						<Button label="Sign Out" type="secondary" onClick={() => router.push("/logout")} />
+					</div>
+				</div>
+			</section>
+		);
+	}
 
 	return (
 		<section className="loginSection" id="homepage-login">
-			<div className="loginAnim">
-				<Lottie className="welcomeAnim" src={getAnimSrc("Welcome")} speed={0.6} />
-			</div>
-			<div className={`loginContainer ${profile || loggedIn ? "profile" : ""}`}>
-				<div className="loginCard front">
-					<div className="header">
-						<h3>Login</h3>
-						<h4>Please enter credentials</h4>
-					</div>
-					<div className="inputContainer">
+			<div className="loginBox">
+				<h3 className="loginHeading">Sign In</h3>
+				<div className="loginForm">
+					<Textfield
+						className="loginField"
+						icon="f0e0"
+						placeholder="Email or username"
+						value={email}
+						onEnterKey={onLogin}
+						onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+					/>
+					<Textfield
+						className="loginField"
+						type="password"
+						placeholder="Password"
+						value={password}
+						onEnterKey={onLogin}
+						onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
+					/>
+					{showKitchen && (
 						<Textfield
-							className={`email ${emailShake ? "shake" : ""}`}
-							icon="f0e0"
-							placeholder="Enter your email"
-							onEnterKey={onNext}
-							value={email}
-							onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+							className="loginField"
+							icon="f86b"
+							placeholder="Kitchen username"
+							value={kitchenUsername}
+							onChange={(e: ChangeEvent<HTMLInputElement>) => setKitchenUsername(e.target.value)}
 						/>
-					</div>
-					<div className="loginAction">
-						<Button className="next" label="Next" onClick={onNext} loading={nextLoading} />
-					</div>
-				</div>
-				<div className="loginCard back">
-					<div className="header">
-						{(session.data?.role === "admin" || session.data?.role === "kitchen") && profileLoading ? (
-							<div className="details">
-								<p className="name"> Wonder-Order</p>
-							</div>
-						) : (
-							<>
-								<Avatar src={profile?.avatar ?? dashboard?.avatar ?? session.data?.restaurant?.avatar ?? ""} size="mini" />
-								<div className="details">
-									<p className="name"> {profile?.name ?? dashboard?.name ?? `${session.data?.customer?.fname} ${session.data?.customer?.lname}`} </p>
-									<p className="address">{profile?.address ?? dashboard?.address ?? session.data?.customer?.phone}</p>
-								</div>
-								<Button className="logout" icon={loggedIn ? "f011" : "f304"} size="mini" onClick={logout} loading={logoutLoading} />
-							</>
-						)}
-					</div>
-					{!loggedIn ? (
-						<div className="body">
-							<div className="inputContainer">
-								<Textfield
-									className={`username ${showKitchen ? "show" : ""}`}
-									icon="f86b"
-									placeholder="Enter kitchen username"
-									value={kitchenUsername}
-									onChange={(e: ChangeEvent<HTMLInputElement>) => setKitchenUsername(e.target.value)}
-								/>
-								<Textfield
-									type="password"
-									className={`password ${passwordShake ? "shake" : ""}`}
-									placeholder={`Enter ${showKitchen ? "kitchen" : "admin"} password`}
-									onEnterKey={onNext}
-									value={password}
-									onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
-								/>
-							</div>
-							<div className="loginAction">
-								<Button
-									className={`kitchenMode ${showKitchen ? "active" : ""}`}
-									type={showKitchen ? "primary" : "secondary"}
-									label="login to kitchen"
-									size="mini"
-									onClick={() => setShowKitchen((v) => !v)}
-								/>
-								<Button className="next" label="Sign In" onClick={onNext} loading={nextLoading} />
-							</div>
-						</div>
-					) : (
-						<div className="loggedInAction">
-							{session.data?.role === "admin" && <Button label="open dashboard" icon="e323" size="mini" onClick={() => router.push("/dashboard")} />}
-							{(session.data?.role === "admin" || session.data?.role === "kitchen") && (
-								<Button label="open kitchen" icon="f86b" size="mini" onClick={() => router.push("/kitchen")} />
-							)}
-							{session.data?.role === "customer" && (
-								<Button label="open  restaurant menu" icon="f86b" size="mini" onClick={() => router.push(`/${session.data?.restaurant?.username}`)} />
-							)}
-						</div>
 					)}
+					<div className="loginActions">
+						<Button
+							className={`kitchenToggle ${showKitchen ? "active" : ""}`}
+							type={showKitchen ? "primary" : "secondary"}
+							label="Kitchen"
+							size="mini"
+							onClick={() => setShowKitchen((v) => !v)}
+						/>
+						<Button label="Sign In" onClick={onLogin} loading={busy} />
+					</div>
 				</div>
 			</div>
 		</section>

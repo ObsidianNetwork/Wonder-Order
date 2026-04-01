@@ -1,5 +1,4 @@
-@import 'tailwindcss/utilities';
-@import 'tailwindcss/theme';
+@import 'tailwindcss';
 
 @theme {
 	--color-brand: hsl(var(--colorBrandPrimary));

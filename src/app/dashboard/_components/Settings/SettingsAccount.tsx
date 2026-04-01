@@ -8,6 +8,7 @@ import { useAdmin } from "#components/context/useContext";
 import { splitStringByFirstWord } from "#utils/helper/common";
 
 import PasswordSettings from "./PasswordSettings";
+import PaymentSettings from "./PaymentSettings";
 import ThemeSettings from "./ThemeSettings";
 import "./settingsAccount.scss";
 
@@ -113,6 +114,7 @@ const SettingsAccount = () => {
 					/>
 				</div>
 			</div>
+			<PaymentSettings />
 			<PasswordSettings />
 			<ThemeSettings />
 		</div>

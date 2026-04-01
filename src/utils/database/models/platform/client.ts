@@ -11,6 +11,8 @@ const ClientSchema = new mongoose.Schema<TClient>(
 		email: { type: String, trim: true, lowercase: true, required: true },
 		status: { type: String, enum: clientStatus, default: "trial" },
 		databaseName: { type: String, unique: true, required: true },
+		stripeAccountId: { type: String, sparse: true },
+		stripeOnboarded: { type: Boolean, default: false },
 	},
 	{ timestamps: true },
 );
@@ -25,4 +27,6 @@ export type TClient = HydratedDocument<{
 	email: string;
 	status: (typeof clientStatus)[number];
 	databaseName: string;
+	stripeAccountId?: string;
+	stripeOnboarded: boolean;
 }>;

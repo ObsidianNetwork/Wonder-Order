@@ -17,7 +17,7 @@ export async function PATCH(req: Request) {
 		const profile = await Profiles.findOne({ restaurantID: session.username });
 		if (!profile) throw { status: 404, message: "Profile not found" };
 
-		const allowedFields = ["name", "description", "address", "avatar", "cover", "gstInclusive", "autoAcceptOrders"];
+		const allowedFields = ["name", "description", "address", "avatar", "cover", "gstInclusive", "autoAcceptOrders", "paymentMode"];
 		for (const field of allowedFields) {
 			if (body[field] !== undefined) {
 				(profile as unknown as Record<string, unknown>)[field] = body[field];

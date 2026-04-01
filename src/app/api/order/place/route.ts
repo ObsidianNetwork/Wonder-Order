@@ -17,8 +17,13 @@ export async function POST(req: Request) {
 
 		const { Menus, Orders, Profiles } = await getTenantFromSession(session);
 
-		// Check if restaurant has auto-accept enabled
 		const profile = await Profiles.findOne({ restaurantID: session?.restaurant?.username });
+
+		// Block direct order placement for pay-first restaurants
+		if (profile?.paymentMode === "pay_first") {
+			throw { status: 400, message: "This restaurant requires payment before ordering. Use the payment flow." };
+		}
+
 		const autoAccept = profile?.autoAcceptOrders ?? false;
 
 		const products: TProduct[] = await Promise.all(

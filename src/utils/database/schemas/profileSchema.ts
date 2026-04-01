@@ -15,6 +15,7 @@ export const ProfileSchema = new Schema<TProfile>(
 		},
 		gstInclusive: { type: Boolean, default: false },
 		autoAcceptOrders: { type: Boolean, default: false },
+		paymentMode: { type: String, enum: ["pay_first", "disabled"], default: "disabled" },
 		categories: [{ type: String, trim: true, lowercase: true, match: /^[^,]*$/ }],
 		avatar: { type: String, trim: true },
 		cover: { type: String, trim: true },
@@ -38,5 +39,6 @@ export type TProfile = HydratedDocument<{
 	themeColor: ThemeColor;
 	gstInclusive: boolean;
 	autoAcceptOrders: boolean;
+	paymentMode: "pay_first" | "disabled";
 	categories: Array<string>;
 }>;

@@ -16,8 +16,15 @@ import "./orderPage.scss";
 
 const OrderPage = () => {
 	const session = useSession();
-	const { loading, loginOpen, setLoginOpen } = useOrder();
+	const { loading, loginOpen, setLoginOpen, setPaymentRequired } = useOrder();
 	const { restaurant } = useRestaurant();
+
+	// Set payment mode from restaurant profile
+	useEffect(() => {
+		if (restaurant?.profile?.paymentMode === "pay_first" && setPaymentRequired) {
+			setPaymentRequired(true);
+		}
+	}, [restaurant?.profile?.paymentMode, setPaymentRequired]);
 
 	const menus = restaurant?.menus as Array<TMenuCustom>;
 	const params = useQueryParams();

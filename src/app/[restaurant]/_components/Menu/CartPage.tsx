@@ -3,6 +3,7 @@ import { useSearchParams } from "next/navigation";
 import { signOut } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { Button, Lottie } from "#components/base";
+import { PaymentSheet } from "#components/base/PaymentSheet";
 
 import { useOrder } from "#components/context/useContext";
 import Collapsible from "#components/layout/Collapsible";
@@ -19,7 +20,10 @@ const CartPage = (props: TCartPageProps) => {
 	const { selectedProducts, increaseProductQuantity, decreaseProductQuantity, resetSelectedProducts } = props;
 	const params = useSearchParams();
 	const table = params.get("table");
-	const { order, placeOrder, placingOrder, cancelOrder, cancelingOrder } = useOrder();
+	const {
+		order, placeOrder, placingOrder, cancelOrder, cancelingOrder,
+		paymentRequired, paymentClientSecret, paymentAmount, startPayment, confirmPaymentOrder, cancelPayment,
+	} = useOrder();
 	const [showOrderHistory, setShowOrderHistory] = useState(false);
 	const [selectionTotal, setSelectionTotal] = useState(0);
 	const [bottomBarActive, setBottomBarActive] = useState(false);
@@ -33,11 +37,18 @@ const CartPage = (props: TCartPageProps) => {
 			return setBottomBarActive(false);
 		}
 
-		if (props.selectedProducts.length === 0) {
-			// return endOrder();
-		}
+		if (props.selectedProducts.length === 0) return;
 
-		await placeOrder(selectedProducts);
+		if (paymentRequired) {
+			await startPayment(selectedProducts);
+		} else {
+			await placeOrder(selectedProducts);
+			resetSelectedProducts();
+		}
+	};
+
+	const onPaymentSuccess = async () => {
+		await confirmPaymentOrder();
 		resetSelectedProducts();
 	};
 	const onCancelOrder = async () => {
@@ -175,6 +186,14 @@ const CartPage = (props: TCartPageProps) => {
 					</div>
 				)}
 			</div>
+			{paymentClientSecret && (
+				<PaymentSheet
+					clientSecret={paymentClientSecret}
+					amount={paymentAmount}
+					onSuccess={onPaymentSuccess}
+					onCancel={cancelPayment}
+				/>
+			)}
 		</div>
 	);
 };

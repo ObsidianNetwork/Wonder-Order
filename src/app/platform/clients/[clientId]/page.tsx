@@ -14,6 +14,8 @@ interface ClientDetail {
 	createdAt: string;
 	theme: Record<string, unknown>;
 	features: Record<string, boolean>;
+	stripeAccountId?: string;
+	stripeOnboarded?: boolean;
 }
 
 const featureLabels: Record<string, string> = {

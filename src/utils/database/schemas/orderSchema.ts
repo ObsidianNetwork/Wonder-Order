@@ -5,6 +5,7 @@ import type { TCustomer } from "./customerSchema";
 import type { TMenu } from "./menuSchema";
 
 const orderState = ["active", "reject", "cancel", "complete"] as const;
+const paymentStatus = ["none", "pending", "paid", "failed", "refunded"] as const;
 
 export const OrderSchema = new Schema<TOrder>(
 	{
@@ -14,6 +15,9 @@ export const OrderSchema = new Schema<TOrder>(
 		state: { type: String, trim: true, lowercase: true, enum: orderState, default: "active" },
 		orderTotal: { type: Number },
 		taxTotal: { type: Number },
+		paymentIntentId: { type: String, sparse: true },
+		paymentStatus: { type: String, enum: paymentStatus, default: "none" },
+		amountPaid: { type: Number },
 		products: [
 			{
 				product: { type: Schema.Types.ObjectId, ref: "menus" },
@@ -48,6 +52,9 @@ export type TOrder = HydratedDocument<{
 	state: (typeof orderState)[number];
 	orderTotal: number;
 	taxTotal: number;
+	paymentIntentId?: string;
+	paymentStatus: (typeof paymentStatus)[number];
+	amountPaid?: number;
 	products: Array<TProduct>;
 }>;
 

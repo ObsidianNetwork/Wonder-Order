@@ -1,6 +1,6 @@
 // Wonder-Order Base Theme
 // Override these --wo-* variables per client to customise the look.
-// Brand colour comes from xtreme-ui's themeController (--colorBrandPrimary).
+// Brand colour comes from themeController (--colorBrandPrimary).
 
 :root {
 	// Currency (override per client: '$', '£', '€', '¥', etc.)
@@ -17,7 +17,7 @@
 	--wo-text-secondary: #6b6b80;
 	--wo-text-muted: #a0a0b0;
 
-	// Brand (derived from xtreme-ui theme colour)
+	// Brand (derived from theme colour)
 	--wo-brand: hsl(var(--colorBrandPrimary));
 	--wo-brand-soft: hsl(var(--colorBrandPrimary) / 0.1);
 	--wo-brand-glow: 0 0 12px hsl(var(--colorBrandPrimary) / 0.3);

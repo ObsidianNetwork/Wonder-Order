@@ -1,6 +1,6 @@
 /** biome-ignore-all lint/performance/noImgElement: we need img tag for og */
 import { ImageResponse } from "next/og";
-import { capitalize } from "xtreme-ui";
+import { capitalize } from "#utils/helper/stringHelper";
 import { OgBackground } from "#components/seo/OgBackground";
 import { getRestaurantProfile } from "#utils/database/helper/getRestaurantProfile";
 import { OG_IMAGE_SIZE, SITE_NAME } from "#utils/seo/constants";

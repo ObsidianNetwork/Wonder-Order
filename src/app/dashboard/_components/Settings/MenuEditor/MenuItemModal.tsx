@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { Button, Textfield } from "xtreme-ui";
+import { Button, Textfield } from "#components/base";
 
 import Modal from "#components/layout/Modal";
 import type { TMenu } from "#utils/database/models/menu";

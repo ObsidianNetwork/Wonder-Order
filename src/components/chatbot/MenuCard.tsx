@@ -1,4 +1,4 @@
-import { Icon } from "xtreme-ui";
+import { Icon } from "#components/base";
 import type { MenuSuggestion } from "../../types/chat";
 import { VEG_ICON_CODE } from "../../utils/constants/common";
 import "./menuCard.scss";

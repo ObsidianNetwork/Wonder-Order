@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { useEffect, useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
-import { Icon } from "xtreme-ui";
+import { Icon } from "#components/base";
 
 import QuantityButton from "#components/base/QuantityButton";
 import type { TMenu } from "#utils/database/models/menu";

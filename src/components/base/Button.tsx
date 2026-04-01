@@ -11,7 +11,7 @@ type ButtonSize = "mini" | "default";
 interface ButtonProps {
 	label?: string;
 	icon?: string;
-	iconType?: "solid" | "regular";
+	iconType?: "solid" | "regular" | "duotone";
 	iconSet?: string;
 	type?: ButtonType;
 	size?: ButtonSize;
@@ -72,7 +72,7 @@ export function Button({
 				<Spinner className="h-4 w-4" />
 			) : (
 				<>
-					{icon && <Icon code={icon} type={iconType} set={iconSet} size={size === "mini" ? 12 : 14} />}
+					{icon && <Icon code={icon} type={iconType === "duotone" ? "solid" : iconType} set={iconType === "duotone" ? "duotone" : iconSet} size={size === "mini" ? 12 : 14} />}
 					{label && <span>{label}</span>}
 				</>
 			)}

@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { useSearchParams } from "next/navigation";
-import { Button } from "xtreme-ui";
+import { Button } from "#components/base";
 
 import type { TOrder } from "#utils/database/models/order";
 

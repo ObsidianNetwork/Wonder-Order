@@ -1,4 +1,4 @@
-import { Lottie } from "xtreme-ui";
+import { Lottie } from "#components/base";
 
 import { getAnimSrc } from "#utils/constants/common";
 

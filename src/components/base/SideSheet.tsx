@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import type { ReactNode } from "react";
-import { Button } from "xtreme-ui";
+import { Button } from "#components/base";
 
 import "./sideSheet.scss";
 

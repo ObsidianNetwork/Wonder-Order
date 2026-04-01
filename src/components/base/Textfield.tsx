@@ -3,17 +3,21 @@
 import clsx from "clsx";
 import type { ChangeEventHandler, HTMLInputTypeAttribute, KeyboardEvent } from "react";
 import { Icon } from "./Icon";
+import "./textfield.scss";
 
 interface TextfieldProps {
+	id?: string;
 	placeholder?: string;
 	value?: string | number;
 	onChange?: ChangeEventHandler<HTMLInputElement>;
 	onEnterKey?: () => void;
+	onKeyDown?: (e: KeyboardEvent<HTMLInputElement>) => void;
 	type?: HTMLInputTypeAttribute;
 	icon?: string;
 	iconType?: "solid" | "regular";
 	disabled?: boolean;
 	className?: string;
+	autoComplete?: string;
 	min?: number;
 	max?: number;
 	step?: number;
@@ -21,30 +25,33 @@ interface TextfieldProps {
 }
 
 export function Textfield({
+	id,
 	placeholder,
 	value,
 	onChange,
 	onEnterKey,
+	onKeyDown,
 	type = "text",
 	icon,
 	iconType,
 	disabled,
 	className,
+	autoComplete,
 	min,
 	max,
 	step,
 	autoFocus,
 }: TextfieldProps) {
 	const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+		if (onKeyDown) onKeyDown(e);
 		if (e.key === "Enter" && onEnterKey) onEnterKey();
 	};
 
 	return (
-		<div
+		<label
 			className={clsx(
-				"flex items-center gap-2 h-11 px-3 rounded-xl bg-[var(--wo-surface-1)] border border-[var(--wo-surface-border)] transition-colors duration-200",
-				"focus-within:border-[hsl(var(--colorBrandPrimary))] focus-within:ring-1 focus-within:ring-[hsl(var(--colorBrandPrimary)/0.3)]",
-				disabled && "opacity-50 cursor-not-allowed",
+				"wo-textfield",
+				disabled && "disabled",
 				className,
 			)}
 		>
@@ -53,22 +60,23 @@ export function Textfield({
 					code={icon}
 					type={iconType}
 					size={14}
-					className="text-[var(--wo-text-muted)] shrink-0"
+					className="wo-textfield-icon"
 				/>
 			)}
 			<input
+				id={id}
 				type={type}
 				placeholder={placeholder}
 				value={value}
 				onChange={onChange}
-				onKeyDown={onEnterKey ? handleKeyDown : undefined}
+				onKeyDown={onEnterKey || onKeyDown ? handleKeyDown : undefined}
 				disabled={disabled}
+				autoComplete={autoComplete}
 				min={min}
 				max={max}
 				step={step}
 				autoFocus={autoFocus}
-				className="flex-1 bg-transparent outline-none text-sm text-[var(--wo-text-primary)] placeholder:text-[var(--wo-text-muted)]"
 			/>
-		</div>
+		</label>
 	);
 }

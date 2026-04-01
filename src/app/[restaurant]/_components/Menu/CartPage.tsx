@@ -2,7 +2,7 @@ import clsx from "clsx";
 import { useSearchParams } from "next/navigation";
 import { signOut } from "next-auth/react";
 import { useEffect, useState } from "react";
-import { Button, Lottie } from "xtreme-ui";
+import { Button, Lottie } from "#components/base";
 
 import { useOrder } from "#components/context/useContext";
 import Collapsible from "#components/layout/Collapsible";

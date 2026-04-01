@@ -29,7 +29,6 @@
 		"react-toastify": "^11.0.5",
 		"sass": "^1.97.3",
 		"swr": "^2.3.8",
-		"xtreme-ui": "^0.0.127",
 		"zod": "^4.3.6"
 	},
 	"devDependencies": {

@@ -2,7 +2,7 @@
 
 import { useSession } from "next-auth/react";
 import { useState } from "react";
-import { Icon, Textfield } from "xtreme-ui";
+import { Icon, Textfield } from "#components/base";
 import { useChat } from "../../utils/hooks/useChat";
 import { useResize } from "../../utils/hooks/useResize";
 import { useOrder, useRestaurant } from "../context/useContext";

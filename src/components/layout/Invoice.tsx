@@ -2,7 +2,7 @@
 
 import { Document, Image, Page, StyleSheet, Text, usePDF, View } from "@react-pdf/renderer";
 import { useEffect, useState } from "react";
-import { Button, Spinner } from "xtreme-ui";
+import { Button, Spinner } from "#components/base";
 
 import type { TOrder } from "#utils/database/models/order";
 import type { TProfile } from "#utils/database/models/profile";

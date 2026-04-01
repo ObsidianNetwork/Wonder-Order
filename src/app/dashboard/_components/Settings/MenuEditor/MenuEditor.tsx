@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { Button, Icon, Spinner, Textfield } from "xtreme-ui";
+import { Button, Icon, Spinner, Textfield } from "#components/base";
 
 import { useAdmin } from "#components/context/useContext";
 import type { TMenu } from "#utils/database/models/menu";

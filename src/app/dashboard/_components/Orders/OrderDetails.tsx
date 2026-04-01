@@ -2,7 +2,7 @@
 
 import { usePDF } from "@react-pdf/renderer";
 import { useEffect, useState } from "react";
-import { Button } from "xtreme-ui";
+import { Button } from "#components/base";
 
 import { InvoiceDocument, type TInvoiceProps } from "#components/layout/Invoice";
 

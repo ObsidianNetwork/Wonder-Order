@@ -2,7 +2,7 @@ import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { Avatar, Button, Spinner, Textfield } from "xtreme-ui";
+import { Avatar, Button, Spinner, Textfield } from "#components/base";
 
 import { useAdmin } from "#components/context/useContext";
 import { splitStringByFirstWord } from "#utils/helper/common";

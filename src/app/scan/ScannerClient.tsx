@@ -3,7 +3,7 @@
 import { Scanner } from "@yudiel/react-qr-scanner";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
-import { Button, Icon } from "xtreme-ui";
+import { Button, Icon } from "#components/base";
 
 import "./scan.scss";
 

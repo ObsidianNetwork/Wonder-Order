@@ -1,7 +1,7 @@
 /** biome-ignore-all lint/a11y/noSvgWithoutTitle: We need it of OG */
 
 import type { CSSProperties } from "react";
-import type { TThemeColor } from "xtreme-ui";
+import type { ThemeColor } from "#components/base/theme";
 import { OG_IMAGE_SIZE } from "#utils/seo/constants";
 
 type Shape = {
@@ -17,7 +17,7 @@ type Shape = {
 	b?: number;
 };
 
-export function OgBackground({ children, themeColor }: { children?: React.ReactNode; themeColor?: TThemeColor }) {
+export function OgBackground({ children, themeColor }: { children?: React.ReactNode; themeColor?: ThemeColor }) {
 	const { h, s } = { h: 26, s: 90, ...themeColor };
 	const c = {
 		l: `hsl(${h},${s}%,75%)`,

@@ -1,6 +1,6 @@
 import { useSearchParams } from "next/navigation";
 import { useMemo, useState } from "react";
-import { Button, Icon } from "xtreme-ui";
+import { Button, Icon } from "#components/base";
 
 import Collapsible from "#components/layout/Collapsible";
 import NoContent from "#components/layout/NoContent";

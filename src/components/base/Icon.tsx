@@ -10,7 +10,7 @@ interface IconProps {
 
 /**
  * Renders a Font Awesome icon using unicode code points.
- * Replaces xtreme-ui's Icon component.
+ * Renders a Font Awesome icon by hex code.
  *
  * Usage: <Icon code="f00d" type="solid" />
  */

@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import type { ReactNode } from "react";
-import { Icon } from "xtreme-ui";
+import { Icon } from "#components/base";
 
 import "./collapsible.scss";
 

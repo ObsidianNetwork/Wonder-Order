@@ -1,6 +1,6 @@
 import { signOut, useSession } from "next-auth/react";
 import { type UIEvent, useEffect, useMemo, useRef, useState } from "react";
-import { ActionCard, Button, Spinner } from "xtreme-ui";
+import { Button, Spinner } from "#components/base";
 
 import SearchButton from "#components/base/SearchButton";
 import SideSheet from "#components/base/SideSheet";
@@ -166,9 +166,9 @@ const OrderPage = () => {
 					<div className="category">
 						<div className="itemCategories">
 							{restaurant?.profile?.categories?.map((item, i) => (
-								<ActionCard key={i} className={`menuCategory ${category.includes(item) ? "active" : ""}`} onClick={() => onCategoryClick(item)}>
+								<button type="button" key={i} className={`menuCategory ${category.includes(item) ? "active" : ""}`} onClick={() => onCategoryClick(item)}>
 									<span className="title">{item}</span>
-								</ActionCard>
+								</button>
 							))}
 						</div>
 					</div>

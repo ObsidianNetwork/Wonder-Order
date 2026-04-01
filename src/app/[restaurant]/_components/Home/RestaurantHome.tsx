@@ -1,7 +1,7 @@
 "use client";
 
 import { type UIEvent, useRef, useState } from "react";
-import { Button } from "xtreme-ui";
+import { Button } from "#components/base";
 
 import { useRestaurant } from "#components/context/useContext";
 import { useQueryParams } from "#utils/hooks/useQueryParams";

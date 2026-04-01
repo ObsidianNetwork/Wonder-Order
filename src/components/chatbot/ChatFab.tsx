@@ -1,4 +1,4 @@
-import { Button } from "xtreme-ui";
+import { Button } from "#components/base";
 import "./chatFab.scss";
 
 interface ChatFabProps {

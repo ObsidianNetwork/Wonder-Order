@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { Icon } from "xtreme-ui";
+import { Icon } from "#components/base";
 
 import "./quantityButton.scss";
 

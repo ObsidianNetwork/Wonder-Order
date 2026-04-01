@@ -2,7 +2,7 @@ import type { ThemeColor } from "./ThemeProvider";
 
 /**
  * Returns an inline script string that sets CSS variables for the brand colour
- * before React hydrates. Drop-in replacement for xtreme-ui's themeController.
+ * before React hydrates.
  *
  * Usage in a server component / layout:
  *   <script dangerouslySetInnerHTML={{ __html: themeController({ color }) }} suppressHydrationWarning />

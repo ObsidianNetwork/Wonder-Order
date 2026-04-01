@@ -1,0 +1,45 @@
+.wo-textfield {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	height: 44px;
+	padding: 0 12px;
+	border-radius: var(--wo-radius-lg);
+	background: var(--wo-surface-1);
+	border: 1px solid var(--wo-surface-border);
+	transition: border-color 0.2s, box-shadow 0.2s;
+	cursor: text;
+
+	&:focus-within {
+		border-color: hsl(var(--colorBrandPrimary));
+		box-shadow: 0 0 0 2px hsl(var(--colorBrandPrimary) / 0.15);
+	}
+
+	&.disabled {
+		opacity: 0.5;
+		cursor: not-allowed;
+	}
+
+	.wo-textfield-icon {
+		color: var(--wo-text-muted);
+		flex-shrink: 0;
+	}
+
+	input {
+		flex: 1;
+		min-width: 0;
+		height: 100%;
+		border: none;
+		outline: none;
+		background: transparent;
+		font-size: 14px;
+		font-family: inherit;
+		color: var(--wo-text-primary);
+		-webkit-appearance: none;
+		appearance: none;
+
+		&::placeholder {
+			color: var(--wo-text-muted);
+		}
+	}
+}

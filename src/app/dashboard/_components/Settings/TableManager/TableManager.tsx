@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { Button, Spinner } from "xtreme-ui";
+import { Button, Spinner } from "#components/base";
 
 import { useAdmin } from "#components/context/useContext";
 

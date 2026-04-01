@@ -4,7 +4,7 @@ import clsx from "clsx";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
-import { Icon } from "xtreme-ui";
+import { Icon } from "#components/base";
 
 import { useQueryParams } from "#utils/hooks/useQueryParams";
 

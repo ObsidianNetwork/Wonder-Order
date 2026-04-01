@@ -1,4 +1,4 @@
-import { Button, Icon } from "xtreme-ui";
+import { Button, Icon } from "#components/base";
 
 import "./welcome.scss";
 

@@ -1,4 +1,4 @@
-import { capitalize } from "xtreme-ui";
+import { capitalize } from "#utils/helper/stringHelper";
 
 import { DashboardProvider } from "#components/context";
 import NavSideBar from "#components/layout/NavSideBar";

@@ -1,5 +1,6 @@
 import { useInView } from "react-intersection-observer";
-import { Button, Icon, useScreenType } from "xtreme-ui";
+import { Button, Icon } from "#components/base";
+import { useScreenType } from "#utils/hooks/useScreenType";
 
 import { VEG_ICON_CODE } from "#utils/constants/common";
 import type { TMenu } from "#utils/database/models/menu";

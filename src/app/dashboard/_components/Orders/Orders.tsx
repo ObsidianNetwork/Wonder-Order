@@ -1,6 +1,6 @@
 import { useSearchParams } from "next/navigation";
 import type { UIEvent } from "react";
-import { Spinner } from "xtreme-ui";
+import { Spinner } from "#components/base";
 
 import { useAdmin } from "#components/context/useContext";
 

@@ -3,7 +3,7 @@ import { signIn, useSession } from "next-auth/react";
 import type { ChangeEvent } from "react";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { Avatar, Button, Textfield } from "xtreme-ui";
+import { Avatar, Button, Textfield } from "#components/base";
 
 import { useAdmin } from "#components/context/useContext";
 

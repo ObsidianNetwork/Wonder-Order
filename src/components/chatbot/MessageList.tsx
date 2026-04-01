@@ -1,6 +1,6 @@
 import DOMPurify from "dompurify";
 import { memo, type RefObject } from "react";
-import { Icon } from "xtreme-ui";
+import { Icon } from "#components/base";
 import type { ChatMessage } from "../../types/chat";
 import { MenuCard } from "./MenuCard";
 import "./messageList.scss";

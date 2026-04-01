@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { capitalize } from "xtreme-ui";
+import { capitalize } from "#utils/helper/stringHelper";
 
 import { ChatInterface } from "#components/chatbot/Chat";
 import { CustomerProvider } from "#components/context";

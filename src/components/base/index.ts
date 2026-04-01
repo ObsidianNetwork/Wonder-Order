@@ -1,6 +1,7 @@
 export { Avatar } from "./Avatar";
 export { Button } from "./Button";
 export { Icon } from "./Icon";
+export { Lottie } from "./Lottie";
 export { Spinner } from "./Spinner";
 export { Textfield } from "./Textfield";
 export {

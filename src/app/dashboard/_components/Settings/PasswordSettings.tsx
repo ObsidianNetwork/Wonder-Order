@@ -2,7 +2,7 @@ import type { ChangeEvent } from "react";
 import { useState } from "react";
 
 import { toast } from "react-toastify";
-import { Button, Spinner, Textfield } from "xtreme-ui";
+import { Button, Spinner, Textfield } from "#components/base";
 
 import "./passwordSettings.scss";
 

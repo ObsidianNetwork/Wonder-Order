@@ -1,10 +1,9 @@
-// Snap scroll container
-// Desktop: smooth free-scroll, no snap (mouse wheel feels natural)
-// Mobile: snap to sections (touch swipe feels intentional)
+// Scroll container
+// Owns the scroll for the homepage sections.
+// Mobile: snap to sections on swipe. Desktop: free smooth scroll.
 .snapScroll {
 	height: 100dvh;
 	overflow-y: auto;
-	scroll-behavior: smooth;
 	-webkit-overflow-scrolling: touch;
 
 	scrollbar-width: none;
@@ -12,13 +11,18 @@
 		display: none;
 	}
 
-	// Only snap on touch devices
+	// Snap on touch devices only
 	@media (hover: none) and (pointer: coarse) {
 		scroll-snap-type: y proximity;
 	}
+
+	// Smooth scroll on desktop only (keeps programmatic scrolls instant on mobile)
+	@media (hover: hover) and (pointer: fine) {
+		scroll-behavior: smooth;
+	}
 }
 
-// Snap section - full-viewport section
+// Full-viewport section
 .snapSection {
 	min-height: 100dvh;
 	scroll-snap-align: start;

@@ -8,36 +8,29 @@ export const CatchNextResponse = ({ message = "Something went wrong", status = 5
 };
 
 export const scrollToSection = (section?: string) => {
-	const element = document.getElementById(section ? section : "homepage") as HTMLDivElement;
+	const element = document.getElementById(section ?? "homepage");
 	if (!element) return;
 
-	const snapContainer = element.closest(".snapScroll") as HTMLElement;
-	const scrollContainer = snapContainer ?? document.documentElement;
-	if (snapContainer) snapContainer.style.scrollSnapType = "none";
-
+	const container = (element.closest(".snapScroll") as HTMLElement) ?? document.documentElement;
+	const targetY = element.getBoundingClientRect().top + container.scrollTop;
 	const isMobile = window.matchMedia("(hover: none) and (pointer: coarse)").matches;
 
 	if (isMobile) {
-		// Mobile: instant snap
-		element.scrollIntoView({ behavior: "instant" as ScrollBehavior });
-		if (snapContainer) snapContainer.style.scrollSnapType = "";
+		container.scrollTo({ top: targetY });
 	} else {
-		// Desktop: controlled smooth scroll
-		const targetY = element.getBoundingClientRect().top + scrollContainer.scrollTop;
-		const startY = scrollContainer.scrollTop;
+		const startY = container.scrollTop;
 		const distance = targetY - startY;
-		const duration = 800;
-		let startTime = 0;
+		const duration = 700;
+		let start = 0;
 
-		const animate = (time: number) => {
-			if (!startTime) startTime = time;
-			const p = Math.min((time - startTime) / duration, 1);
+		const step = (time: number) => {
+			if (!start) start = time;
+			const p = Math.min((time - start) / duration, 1);
 			const ease = p < 0.5 ? 2 * p * p : 1 - (-2 * p + 2) ** 2 / 2;
-			scrollContainer.scrollTop = startY + distance * ease;
-			if (p < 1) requestAnimationFrame(animate);
-			else if (snapContainer) snapContainer.style.scrollSnapType = "";
+			container.scrollTop = startY + distance * ease;
+			if (p < 1) requestAnimationFrame(step);
 		};
-		requestAnimationFrame(animate);
+		requestAnimationFrame(step);
 	}
 };
 

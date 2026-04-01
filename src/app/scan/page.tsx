@@ -1,5 +1,4 @@
-import { themeController } from "xtreme-ui";
-import { DEFAULT_THEME_COLOR } from "#utils/constants/common";
+import { DEFAULT_THEME_COLOR, themeController } from "#components/base/theme";
 import { getThemeColor } from "#utils/database/helper/getThemeColor";
 import ScannerClient from "./ScannerClient";
 

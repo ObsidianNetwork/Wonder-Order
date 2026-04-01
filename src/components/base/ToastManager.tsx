@@ -1,8 +1,8 @@
 import { ToastContainer } from "react-toastify";
-import { useXTheme } from "xtreme-ui";
+import { useTheme } from "#components/base/theme";
 
 export const ToastManager = () => {
-	const { themeScheme } = useXTheme();
+	const { themeScheme } = useTheme();
 
 	return <ToastContainer position="top-center" theme={themeScheme === "light" ? "light" : "dark"} />;
 };

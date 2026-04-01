@@ -2,7 +2,7 @@
 
 import { SessionProvider } from "next-auth/react";
 import { type ReactNode, Suspense } from "react";
-import { XProvider } from "xtreme-ui";
+import { ThemeProvider } from "#components/base/theme";
 
 import { ToastManager } from "#components/base/ToastManager";
 
@@ -12,11 +12,11 @@ import { RestaurantProvider } from "./Restaurant";
 
 export const GlobalProvider = ({ children }: ProviderProps) => {
 	return (
-		<XProvider>
+		<ThemeProvider>
 			<SessionProvider>
 				<Suspense>{children}</Suspense>
 			</SessionProvider>
-		</XProvider>
+		</ThemeProvider>
 	);
 };
 

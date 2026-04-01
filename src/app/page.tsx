@@ -1,4 +1,4 @@
-import { themeController } from "xtreme-ui";
+import { themeController } from "#components/base/theme";
 
 import { DashboardProvider } from "#components/context";
 import JsonLd from "#components/seo/JsonLd";

@@ -1,0 +1,15 @@
+@import 'tailwindcss';
+
+@theme {
+	--color-brand: hsl(var(--colorBrandPrimary));
+	--color-brand-soft: hsl(var(--colorBrandPrimary) / 0.1);
+
+	--color-surface-0: var(--wo-surface-0);
+	--color-surface-1: var(--wo-surface-1);
+	--color-surface-2: var(--wo-surface-2);
+	--color-surface-border: var(--wo-surface-border);
+
+	--color-text-primary: var(--wo-text-primary);
+	--color-text-secondary: var(--wo-text-secondary);
+	--color-text-muted: var(--wo-text-muted);
+}

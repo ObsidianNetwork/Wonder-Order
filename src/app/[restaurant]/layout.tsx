@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { themeController } from "xtreme-ui";
+import { themeController } from "#components/base/theme";
 
 import { getThemeColor } from "#utils/database/helper/getThemeColor";
 

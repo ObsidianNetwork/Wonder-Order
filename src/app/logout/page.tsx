@@ -3,8 +3,8 @@
 import { useRouter } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
 import { useEffect } from "react";
-import { Spinner, themeController } from "xtreme-ui";
-import { DEFAULT_THEME_COLOR } from "#utils/constants/common";
+import { Spinner } from "#components/base";
+import { DEFAULT_THEME_COLOR, themeController } from "#components/base/theme";
 
 export default function Logout() {
 	const router = useRouter();

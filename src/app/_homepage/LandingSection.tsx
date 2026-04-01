@@ -1,5 +1,5 @@
 import { type Dispatch, type MouseEvent, type SetStateAction, useEffect, useRef, useState } from "react";
-import { Button, useXTheme } from "xtreme-ui";
+import { useTheme } from "#components/base/theme";
 
 import { APP } from "#utils/config/constants";
 import { scrollToSection } from "#utils/helper/common";
@@ -14,7 +14,7 @@ const maxBlurPerImage = 30;
 const maxOverlayTranslate = 0.3;
 
 const LandingSection = () => {
-	const { isDarkTheme } = useXTheme();
+	const { isDarkTheme } = useTheme();
 	const ref = useRef<HTMLDivElement>(null);
 	const [blurBackground, setBlurBackground] = useState<number>(maxBlurPerImage);
 	const [blurOverlay, setBlurOverlay] = useState<number>(maxBlurPerImage);
@@ -54,7 +54,7 @@ const LandingSection = () => {
 				<p className="desc">Modern contactless ordering for restaurants.</p>
 				<p className="desc">QR codes, live menus, instant kitchen updates.</p>
 				<div className="greetingAction">
-					<button type="button" className="heroSignIn" onPointerUp={() => scrollToSection("homepage-login")}>
+					<button type="button" className="heroSignIn" onClick={() => scrollToSection("homepage-login")}>
 						Sign In
 					</button>
 				</div>

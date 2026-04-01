@@ -14,60 +14,109 @@
 
 		.heading {
 			color: var(--wo-text-primary);
-			font-size: 30px;
+			font-size: 28px;
 			font-variation-settings: 'wdth' 75, 'wght' 500;
 			margin: 0;
-			overflow: hidden;
 			user-select: none;
-			white-space: nowrap;
-			transition: all 0.2s ease-out;
-
-			span {
-				font-variation-settings: 'wdth' 75, 'wght' 300;
-			}
 		}
 
 		.action {
 			display: flex;
-			justify-content: flex-end;
 			align-items: center;
 			gap: 8px;
+		}
+	}
+}
 
-			.clear {
-				transform: scale(0.8);
+.themeGrid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+	gap: 14px;
+	margin-top: 24px;
+	padding-bottom: 8px;
+}
+
+.themeCard {
+	display: flex;
+	flex-direction: column;
+	border-radius: var(--wo-radius-lg);
+	border: 2px solid var(--wo-surface-border);
+	background: var(--wo-surface-0);
+	overflow: hidden;
+	cursor: pointer;
+	transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+	text-align: left;
+	padding: 0;
+
+	&:hover {
+		border-color: var(--card-brand);
+		transform: translateY(-2px);
+		box-shadow: 0 4px 16px rgb(0 0 0 / 10%);
+	}
+
+	&.active {
+		border-color: var(--card-brand);
+		box-shadow: 0 0 0 2px var(--card-brand), 0 4px 16px rgb(0 0 0 / 10%);
+	}
+
+	.preview {
+		height: 72px;
+		background: var(--card-s0);
+		padding: 12px;
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+
+		.previewBar {
+			height: 8px;
+			width: 60%;
+			border-radius: 4px;
+			background: var(--card-brand);
+		}
+
+		.previewDots {
+			display: flex;
+			gap: 6px;
+
+			.dot {
+				width: 8px;
+				height: 8px;
+				border-radius: 50%;
+				background: var(--card-border);
+
+				&:first-child {
+					background: var(--card-brand);
+				}
 			}
 		}
 	}
 
-	.colorPickerWrapper {
+	.cardInfo {
+		padding: 10px 12px;
 		display: flex;
 		flex-direction: column;
-		margin: 36px 0 24px;
+		gap: 2px;
 
-		.spinner {
-			margin: 64px 0;
+		.cardName {
+			font-size: 13px;
+			font-weight: 600;
+			color: var(--wo-text-primary);
 		}
 
-		.colorPopper {
-			margin-bottom: 32px;
+		.cardDesc {
+			font-size: 11px;
+			color: var(--wo-text-secondary);
 		}
 	}
 }
 
 @media (width <= 460px) {
-	.themeSettings {
-		.colorHeader .heading {
-			font-size: 24px;
-		}
+	.themeSettings .colorHeader .heading {
+		font-size: 24px;
 	}
-}
 
-@media (width <= 420px) {
-	.themeSettings {
-		padding: 20px 25px;
-
-		.colorHeader .heading {
-			font-size: 5vw;
-		}
+	.themeGrid {
+		grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+		gap: 10px;
 	}
 }

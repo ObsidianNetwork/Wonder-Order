@@ -1,4 +1,3 @@
-import { ThemeSelect } from "xtreme-ui";
 import { APP } from "#utils/config/constants";
 import { scrollToSection } from "#utils/helper/common";
 import "./navbar.scss";
@@ -24,7 +23,6 @@ export default function Navbar({ menuOpen, setMenuOpen }: TNavBarProps) {
 						<p>Sign In</p>
 					</div>
 				</div>
-				<ThemeSelect size="mini" withSwatch withScheme />
 			</div>
 		</div>
 	);

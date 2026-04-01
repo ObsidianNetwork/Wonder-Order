@@ -1,6 +1,6 @@
 import type { HydratedDocument } from "mongoose";
 import { Schema } from "mongoose";
-import type { TThemeColor } from "xtreme-ui";
+import type { ThemeColor } from "#components/base/theme";
 
 export const ProfileSchema = new Schema<TProfile>(
 	{
@@ -35,7 +35,7 @@ export type TProfile = HydratedDocument<{
 	avatar: string;
 	cover: string;
 	photos: Array<string>;
-	themeColor: TThemeColor;
+	themeColor: ThemeColor;
 	gstInclusive: boolean;
 	autoAcceptOrders: boolean;
 	categories: Array<string>;

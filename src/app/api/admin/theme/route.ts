@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
-import { isValidThemeColor } from "xtreme-ui";
+import { isValidThemeColor } from "#components/base/theme";
 
 import type { TProfile } from "#utils/database/models/profile";
 import { getTenantFromSession } from "#utils/database/tenantHelper";

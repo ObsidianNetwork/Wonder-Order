@@ -7,8 +7,11 @@ export {
 	ThemeProvider,
 	useTheme,
 	themeController,
-	ThemeColorsPreset,
+	themes,
+	DEFAULT_THEME_ID,
+	DEFAULT_THEME,
 	DEFAULT_THEME_COLOR,
 	isValidThemeColor,
+	getTheme,
 } from "./theme";
-export type { ThemeColor, ThemeScheme } from "./theme";
+export type { ThemeColor, ThemeScheme, WonderTheme } from "./theme";

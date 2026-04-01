@@ -3,9 +3,31 @@
 @use '../utils/styles/templates/currency';
 @use '../utils/styles/templates/shake';
 @use '../utils/styles/templates/scroll';
+
+@import 'tailwindcss';
 @import 'react-toastify/dist/ReactToastify.css';
 
+@theme {
+	--color-brand: hsl(var(--colorBrandPrimary));
+	--color-brand-soft: hsl(var(--colorBrandPrimary) / 0.1);
+
+	--color-surface-0: var(--wo-surface-0);
+	--color-surface-1: var(--wo-surface-1);
+	--color-surface-2: var(--wo-surface-2);
+	--color-surface-border: var(--wo-surface-border);
+
+	--color-text-primary: var(--wo-text-primary);
+	--color-text-secondary: var(--wo-text-secondary);
+	--color-text-muted: var(--wo-text-muted);
+}
+
 html {
+	// Brand colour HSL components — set by themeController inline script
+	--H: 280;
+	--S: 40%;
+	--L: 55%;
+	--colorBrandPrimary: var(--H) var(--S) var(--L);
+
 	padding: 0;
 	margin: 0;
 	background: var(--wo-surface-0);

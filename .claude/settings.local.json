@@ -1,5 +1,14 @@
 {
-	"permissions": {
-		"allow": ["Bash(pnpm build:*)", "Bash(xargs grep:*)", "Bash(pnpm lint:*)"]
-	}
+  "permissions": {
+    "allow": [
+      "Bash(pnpm build:*)",
+      "Bash(xargs grep:*)",
+      "Bash(pnpm lint:*)",
+      "Bash(pnpm add:*)",
+      "Bash(node -e \"const x = require\\('xtreme-ui'\\); console.log\\('plum:', JSON.stringify\\(x.ThemeColorsPreset?.plum\\)\\); console.log\\('presets:', JSON.stringify\\(x.ThemeColorsPreset\\)\\); console.log\\('controller:', x.themeController?.toString\\(\\)?.slice\\(0, 500\\)\\)\")",
+      "Bash(node -e ':*)",
+      "Bash(node --input-type=module -e \"import { h } from './node_modules/xtreme-ui/dist/utils/constants/theme.js'; console.log\\(JSON.stringify\\(h, null, 2\\)\\);\")",
+      "Bash(npx tsc:*)"
+    ]
+  }
 }
